@@ -36,6 +36,8 @@ export default function WorkCard({ project, index }: WorkCardProps) {
               className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-300 group-hover:scale-105"
             />
 
+            <div className="absolute inset-0 bg-green-accent/30 mix-blend-multiply group-hover:bg-transparent transition-colors duration-300 pointer-events-none" />
+
             {/* Hover overlay */}
             <div className="absolute inset-0 bg-foreground/5 group-hover:bg-foreground/10 transition-colors duration-300" />
 
