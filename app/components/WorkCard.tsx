@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { motion } from "motion/react";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { ArrowUpRight, ExternalLink } from "lucide-react";
-import { Project } from "@/app/data/projects";
+import { motion } from 'motion/react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Badge } from '@/components/ui/badge';
+import { ArrowUpRight, ExternalLink } from 'lucide-react';
+import { Project } from '@/app/data/projects';
 
 interface WorkCardProps {
   project: Project;
@@ -16,29 +17,31 @@ export default function WorkCard({ project, index }: WorkCardProps) {
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="h-full"
     >
       <div className="group relative h-full bg-card rounded-xl overflow-hidden border border-border hover:border-green-accent/50 transition-all duration-300">
         {/* Image/Preview area */}
         <Link href={`/project/${project.slug}`} className="block">
-          <div className="aspect-[4/3] bg-gradient-to-br from-secondary to-secondary/50 relative overflow-hidden">
+          <div className="aspect-4/3 bg-linear-to-br from-secondary to-secondary/50 relative overflow-hidden">
             {/* Decorative grid */}
             <div className="absolute inset-0 grid-pattern opacity-30" />
-            
-            {/* Placeholder content */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className="w-16 h-16 rounded-2xl bg-green-accent/10 border border-green-accent/20 flex items-center justify-center transition-all group-hover:bg-green-accent/20"
-              >
-                <ArrowUpRight className="w-7 h-7 text-green-accent" />
-              </motion.div>
-            </div>
+
+            <Image
+              src={project.image}
+              alt={`${project.title} preview`}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-300 group-hover:scale-105"
+            />
 
             {/* Hover overlay */}
-            <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-300" />
+            <div className="absolute inset-0 bg-foreground/5 group-hover:bg-foreground/10 transition-colors duration-300" />
+
+            <div className="absolute top-4 right-4 rounded-full bg-background/70 p-2 backdrop-blur-xs">
+              <ArrowUpRight className="w-4 h-4 text-foreground" />
+            </div>
           </div>
         </Link>
 
@@ -68,7 +71,10 @@ export default function WorkCard({ project, index }: WorkCardProps) {
               </Badge>
             ))}
             {project.technologies.length > 3 && (
-              <Badge variant="secondary" className="text-xs font-normal px-2 py-0.5">
+              <Badge
+                variant="secondary"
+                className="text-xs font-normal px-2 py-0.5"
+              >
                 +{project.technologies.length - 3}
               </Badge>
             )}

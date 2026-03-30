@@ -103,7 +103,7 @@ export default function Hero() {
               e.preventDefault();
               document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="px-8 py-3.5 border border-border font-medium rounded-full hover:bg-secondary transition-all hover:scale-105"
+            className="px-8 py-3.5 border border-border font-medium rounded-full bg-white hover:bg-secondary transition-all hover:scale-105"
           >
             Get in touch
           </a>
@@ -129,7 +129,7 @@ export default function Hero() {
       </motion.button>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-background to-transparent" />
     </section>
   );
 }

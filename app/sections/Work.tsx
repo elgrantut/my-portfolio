@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
-import { projects } from "@/app/data/projects";
-import WorkCard from "@/app/components/WorkCard";
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef } from 'react';
+import { projects } from '@/app/data/projects';
+import WorkCard from '@/app/components/WorkCard';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
+} from '@/components/ui/carousel';
 
 export default function Work() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"],
+    offset: ['start end', 'end start'],
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
@@ -31,7 +31,7 @@ export default function Work() {
       <div className="absolute inset-0 grid-pattern opacity-20" />
       <motion.div
         style={{ y }}
-        className="absolute -top-32 -left-32 w-[600px] h-[600px] bg-green-accent/5 rounded-full blur-3xl"
+        className="absolute -top-32 -left-32 w-150 h-150 bg-green-accent/5 rounded-full blur-3xl"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,7 +40,7 @@ export default function Work() {
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5 }}
             className="inline-block text-xs font-medium tracking-widest uppercase text-green-accent mb-6"
           >
@@ -50,7 +50,7 @@ export default function Work() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground mb-6"
           >
@@ -60,12 +60,12 @@ export default function Work() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-xl mx-auto"
           >
-            A selection of projects showcasing frontend development, UI/UX design,
-            and application architecture.
+            A selection of projects showcasing frontend development, UI/UX
+            design, and application architecture.
           </motion.p>
         </div>
 
@@ -73,12 +73,12 @@ export default function Work() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <Carousel
             opts={{
-              align: "start",
+              align: 'start',
               loop: true,
             }}
             className="w-full"

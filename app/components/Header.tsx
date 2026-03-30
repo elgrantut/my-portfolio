@@ -1,10 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "motion/react";
+import {
+  motion,
+  useScroll,
+  useMotionValueEvent,
+  AnimatePresence,
+} from "motion/react";
 import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
 import { X, Menu } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -52,7 +57,10 @@ export default function Header() {
     };
   }, [mobileMenuOpen]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
     e.preventDefault();
     setMobileMenuOpen(false);
     const element = document.querySelector(href);
@@ -82,7 +90,7 @@ export default function Header() {
               href="/"
               className="text-lg font-semibold tracking-tight hover:text-green-accent transition-colors"
             >
-              portfolio<span className="text-green-accent">.</span>
+              Portfolio<span className="text-green-accent">.</span>
             </Link>
 
             <nav className="hidden md:flex items-center gap-8">
@@ -173,7 +181,9 @@ export default function Header() {
                 transition={{ duration: 0.3, delay: 0.4 }}
                 className="mt-12 pt-8 border-t border-border"
               >
-                <p className="text-sm text-muted-foreground mb-4">Get in touch</p>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Get in touch
+                </p>
                 <a
                   href="mailto:hello@example.com"
                   className="text-lg font-medium text-foreground hover:text-green-accent transition-colors"
