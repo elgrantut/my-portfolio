@@ -1,6 +1,20 @@
-import { Mail, Github, Twitter, Linkedin, MapPin } from 'lucide-react';
+import {
+  Mail,
+  Github,
+  Twitter,
+  Linkedin,
+  MapPin,
+  LucideIcon,
+} from 'lucide-react';
 
-export const contactLinks = [
+export interface ContactLink {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  href: string | null;
+}
+
+export const contactLinks: ContactLink[] = [
   {
     icon: Mail,
     label: 'Email',

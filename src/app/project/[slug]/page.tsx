@@ -141,7 +141,7 @@ export default async function ProjectPage({ params }: Props) {
                 key={feature}
                 className="flex items-start gap-3 p-4 rounded-lg bg-secondary/50 border border-border"
               >
-                <CheckCircle className="w-5 h-5 text-green-accent flex-shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-green-accent shrink-0 mt-0.5" />
                 <span className="text-foreground">{feature}</span>
               </li>
             ))}

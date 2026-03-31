@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import ContactForm from '@/components/ContactForm';
-import { ArrowUpRight } from 'lucide-react';
+import ContactLinkCard from '@/components/ContactLinkCard';
 import { contactLinks } from '@/data/contact';
 
 export default function Contact() {
@@ -63,7 +63,7 @@ export default function Contact() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10">
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -83,85 +83,23 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col justify-center"
           >
-            <div className="space-y-4">
-              {contactLinks.map((link, index) => (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
-                >
-                  {link.href ? (
-                    <a
-                      href={link.href}
-                      target={
-                        link.href.startsWith('http') ? '_blank' : undefined
-                      }
-                      rel={
-                        link.href.startsWith('http')
-                          ? 'noopener noreferrer'
-                          : undefined
-                      }
-                      className="flex items-center justify-between p-4 rounded-lg bg-card border border-border hover:border-green-accent/50 transition-all group"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="p-2.5 rounded-lg bg-secondary text-muted-foreground group-hover:bg-green-accent/10 group-hover:text-green-accent transition-colors">
-                          <link.icon className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <p className="text-xs text-muted-foreground">
-                            {link.label}
-                          </p>
-                          <p className="font-medium text-foreground">
-                            {link.value}
-                          </p>
-                        </div>
-                      </div>
-                      <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-green-accent transition-colors" />
-                    </a>
-                  ) : (
-                    <div className="flex items-center justify-between p-4 rounded-lg bg-card border border-border">
-                      <div className="flex items-center gap-4">
-                        <div className="p-2.5 rounded-lg bg-secondary text-muted-foreground">
-                          <link.icon className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <p className="text-xs text-muted-foreground">
-                            {link.label}
-                          </p>
-                          <p className="font-medium text-foreground">
-                            {link.value}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </motion.div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+              {contactLinks.map((link, index) => {
+                const isLast = index === contactLinks.length - 1;
+                return (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                    className={isLast ? 'md:col-span-2' : ''}
+                  >
+                    <ContactLinkCard link={link} />
+                  </motion.div>
+                );
+              })}
             </div>
-
-            {/* Availability */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="mt-8 p-6 rounded-xl bg-green-accent/5 border border-green-accent/20"
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-accent opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-accent" />
-                </span>
-                <span className="font-medium text-foreground">
-                  Available for freelance
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground pl-5.5">
-                Currently accepting new projects and collaborations.
-              </p>
-            </motion.div>
           </motion.div>
         </div>
       </div>
