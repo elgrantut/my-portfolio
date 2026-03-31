@@ -44,7 +44,7 @@ export default async function ProjectPage({ params }: Props) {
       {/* Hero section */}
       <div className="relative pt-32 pb-16 sm:pt-40 sm:pb-24 border-b border-border">
         <div className="absolute inset-0 grid-pattern opacity-30" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           {/* Back link */}
           <Link
             href="/#work"

@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import ContactForm from '@/components/ContactForm';
 import { ArrowUpRight } from 'lucide-react';
-import { contactLinks } from '@/data/cotnact';
+import { contactLinks } from '@/data/contact';
 
 export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null);

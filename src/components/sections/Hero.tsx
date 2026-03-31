@@ -1,27 +1,22 @@
-"use client";
+'use client';
 
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
-import { ArrowDown } from "lucide-react";
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef } from 'react';
+import { ArrowDown } from 'lucide-react';
+import { useScrollTo } from '@/hooks';
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const scrollTo = useScrollTo();
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  const handleScrollDown = () => {
-    const aboutSection = document.querySelector("#about");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
     <section
@@ -91,7 +86,7 @@ export default function Hero() {
             href="#work"
             onClick={(e) => {
               e.preventDefault();
-              document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" });
+              scrollTo('#work');
             }}
             className="group relative px-8 py-3.5 bg-foreground text-background font-medium rounded-full overflow-hidden transition-all hover:scale-105"
           >
@@ -101,7 +96,7 @@ export default function Hero() {
             href="#contact"
             onClick={(e) => {
               e.preventDefault();
-              document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+              scrollTo('#contact');
             }}
             className="px-8 py-3.5 border border-border font-medium rounded-full bg-white hover:bg-secondary transition-all hover:scale-105"
           >
@@ -112,7 +107,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.button
-        onClick={handleScrollDown}
+        onClick={() => scrollTo('#about')}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
@@ -121,7 +116,7 @@ export default function Hero() {
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="p-2 border border-border rounded-full"
         >
           <ArrowDown className="w-4 h-4" />
