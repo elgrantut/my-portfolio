@@ -1,14 +1,9 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getProjectBySlug, projects } from "@/app/data/projects";
-import { Badge } from "@/components/ui/badge";
-import {
-  ArrowLeft,
-  ExternalLink,
-  Github,
-  CheckCircle,
-} from "lucide-react";
+import { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { getProjectBySlug, projects } from '@/data/projects';
+import { Badge } from '@/components/ui/badge';
+import { ArrowLeft, ExternalLink, Github, CheckCircle } from 'lucide-react';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -20,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!project) {
     return {
-      title: "Project Not Found",
+      title: 'Project Not Found',
     };
   }
 
@@ -155,7 +150,9 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* CTA */}
         <div className="mt-20 pt-16 border-t border-border text-center">
-          <p className="text-muted-foreground mb-6">Interested in working together?</p>
+          <p className="text-muted-foreground mb-6">
+            Interested in working together?
+          </p>
           <Link
             href="/#contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background font-medium rounded-lg hover:bg-foreground/90 transition-colors"

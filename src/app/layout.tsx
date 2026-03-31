@@ -1,22 +1,23 @@
-import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/app/context/ThemeContext";
-import Header from "@/app/components/Header";
+import type { Metadata } from 'next';
+import { Inter, Space_Grotesk } from 'next/font/google';
+import './globals.css';
+import { ThemeProvider } from '@/context/ThemeContext';
+import Header from '@/components/Header';
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+  variable: '--font-inter',
+  subsets: ['latin'],
 });
 
 const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
+  variable: '--font-space-grotesk',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Frontend Developer",
-  description: "Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive web applications.",
+  title: 'Portfolio | Frontend Developer',
+  description:
+    'Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive web applications.',
 };
 
 export default function RootLayout({

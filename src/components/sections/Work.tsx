@@ -2,8 +2,8 @@
 
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
-import { projects } from '@/app/data/projects';
-import WorkCard from '@/app/components/WorkCard';
+import { projects } from '@/data/projects';
+import WorkCard from '@/components/WorkCard';
 import {
   Carousel,
   CarouselContent,
@@ -25,7 +25,7 @@ export default function Work() {
     <section
       ref={sectionRef}
       id="work"
-      className="relative py-32 sm:py-40 bg-secondary/30 overflow-hidden"
+      className="relative py-16 sm:py-24 bg-secondary/30 overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 grid-pattern opacity-20" />

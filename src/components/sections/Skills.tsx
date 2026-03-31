@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
-import { skillCategories } from "@/app/data/skills";
-import SkillBar from "@/app/components/SkillBar";
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef } from 'react';
+import { skillCategories } from '@/data/skills';
+import SkillBar from '@/components/SkillBar';
 
 export default function Skills() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"],
+    offset: ['start end', 'end start'],
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
@@ -18,13 +18,13 @@ export default function Skills() {
     <section
       ref={sectionRef}
       id="skills"
-      className="relative py-32 sm:py-40 bg-background overflow-hidden"
+      className="relative py-16 sm:py-32 bg-background overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 grid-pattern opacity-30" />
       <motion.div
         style={{ y }}
-        className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-green-accent/5 rounded-full blur-3xl"
+        className="absolute bottom-0 right-0 w-125 h-125 bg-green-accent/5 rounded-full blur-3xl"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,7 +33,7 @@ export default function Skills() {
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5 }}
             className="inline-block text-xs font-medium tracking-widest uppercase text-green-accent mb-6"
           >
@@ -43,7 +43,7 @@ export default function Skills() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground mb-6"
           >
@@ -53,7 +53,7 @@ export default function Skills() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-xl mx-auto"
           >
@@ -69,7 +69,7 @@ export default function Skills() {
               key={category.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{
                 duration: 0.5,
                 delay: categoryIndex * 0.1,
@@ -106,18 +106,20 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-16 text-center"
         >
-          <p className="text-sm text-muted-foreground mb-6">Also experienced in</p>
+          <p className="text-sm text-muted-foreground mb-6">
+            Also experienced in
+          </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             {[
-              "Problem Solving",
-              "Team Collaboration",
-              "Agile Methodologies",
-              "Code Review",
-              "Technical Writing",
+              'Problem Solving',
+              'Team Collaboration',
+              'Agile Methodologies',
+              'Code Review',
+              'Technical Writing',
             ].map((skill, index) => (
               <motion.span
                 key={skill}
