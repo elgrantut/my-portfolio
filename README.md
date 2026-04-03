@@ -5,14 +5,25 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
 bun dev
 ```
+
+## Contact Form Setup
+
+The contact form validates input with Zod + TanStack Form and sends emails through a Next.js API route using Resend.
+
+Create a `.env.local` file and set:
+
+```bash
+RESEND_API_KEY=your_resend_api_key
+CONTACT_TO_EMAIL=your-email@example.com
+CONTACT_FROM_EMAIL=Portfolio Contact <onboarding@resend.dev>
+```
+
+Notes:
+
+- `CONTACT_FROM_EMAIL` must use a sender allowed by your Resend account.
+- Base anti-abuse is enabled: honeypot + IP rate limit + duplicate submission cooldown.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
