@@ -5,14 +5,23 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
 bun dev
 ```
+
+## Contact Form Setup
+
+The contact form validates input with Zod + TanStack Form and opens the visitor's email app with a prefilled draft (mailto flow).
+
+Create a `.env.local` file and set the destination email:
+
+```bash
+NEXT_PUBLIC_CONTACT_EMAIL=your-email@example.com
+```
+
+Notes:
+
+- This flow has no backend cost because it does not send emails from a server.
+- The visitor must confirm and send the email from their own email client.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

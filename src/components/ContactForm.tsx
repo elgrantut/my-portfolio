@@ -1,45 +1,99 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef } from 'react';
+import { useForm } from '@tanstack/react-form';
 import { motion } from 'motion/react';
+import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Send, CheckCircle, Loader2 } from 'lucide-react';
+import { Send, Loader2 } from 'lucide-react';
+import {
+  contactFormSchema,
+  type ContactFormValues,
+} from '@/lib/contact-schema';
+
+const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
+const SUBMIT_COOL_DOWN_MS = 30_000;
+
+type ContactFormState = ContactFormValues & {
+  website: string;
+};
+
+function getErrorMessage(error: unknown): string | undefined {
+  if (!error) return undefined;
+  if (typeof error === 'string') return error;
+
+  if (
+    typeof error === 'object' &&
+    error !== null &&
+    'message' in error &&
+    typeof error.message === 'string'
+  ) {
+    return error.message;
+  }
+
+  return 'Invalid value';
+}
+
+function buildMailtoUrl(values: ContactFormValues): string {
+  const subject = `New portfolio contact - ${values.name}`;
+  const body = [
+    `Name: ${values.name.trim()}`,
+    `Email: ${values.email.trim()}`,
+    '',
+    'Message:',
+    values.message.trim(),
+  ].join('\n');
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+  const lastSubmitRef = useRef(0);
+
+  const form = useForm({
+    defaultValues: {
+      name: '',
+      email: '',
+      message: '',
+      website: '',
+    } as ContactFormState,
+    onSubmit: async ({ value, formApi }) => {
+      if (!CONTACT_EMAIL) {
+        toast.error('Contact email is not configured yet.');
+        return;
+      }
+
+      if (value.website.trim()) {
+        toast.error('Unable to send message right now.');
+        return;
+      }
+
+      const now = Date.now();
+      if (now - lastSubmitRef.current < SUBMIT_COOL_DOWN_MS) {
+        toast.error(
+          'Please wait a few seconds before sending another message.',
+        );
+        return;
+      }
+
+      const parsed = contactFormSchema.safeParse(value);
+      if (!parsed.success) {
+        toast.error('Please review the highlighted fields.');
+        return;
+      }
+
+      try {
+        const mailtoUrl = buildMailtoUrl(parsed.data);
+        window.open(mailtoUrl, '_self');
+        lastSubmitRef.current = now;
+        toast.success('Your email app was opened with the message draft.');
+        formApi.reset();
+      } catch {
+        toast.error('Could not open your email app. Please try again.');
+      }
+    },
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    console.log('Form submitted:', formData);
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
-
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   return (
     <motion.form
@@ -47,85 +101,146 @@ export default function ContactForm() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5 }}
-      onSubmit={handleSubmit}
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        void form.handleSubmit();
+      }}
       className="space-y-6"
     >
-      {isSubmitted ? (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center py-16"
+      <form.Field name="website">
+        {(field) => (
+          <input
+            aria-hidden="true"
+            autoComplete="off"
+            tabIndex={-1}
+            value={field.state.value}
+            onBlur={field.handleBlur}
+            onChange={(e) => field.handleChange(e.target.value)}
+            className="hidden"
+          />
+        )}
+      </form.Field>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <form.Field
+          name="name"
+          validators={{
+            onBlur: contactFormSchema.shape.name,
+            onChange: contactFormSchema.shape.name,
+          }}
         >
-          <div className="w-16 h-16 rounded-full bg-green-accent/10 flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-8 h-8 text-green-accent" />
-          </div>
-          <h4 className="text-xl font-semibold text-foreground mb-2">
-            Message sent!
-          </h4>
-          <p className="text-muted-foreground">
-            Thanks for reaching out. I'll get back to you soon.
-          </p>
-        </motion.div>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {(field) => {
+            const errorMessage = getErrorMessage(field.state.meta.errors[0]);
+
+            return (
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-foreground mb-2"
+                >
+                  Name
+                </label>
+                <Input
+                  id="name"
+                  name={field.name}
+                  type="text"
+                  required
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  placeholder="Your name"
+                  className="w-full bg-background border-border focus:border-green-accent focus:ring-green-accent"
+                />
+                {field.state.meta.isTouched && errorMessage ? (
+                  <p className="mt-2 text-sm text-destructive">
+                    {errorMessage}
+                  </p>
+                ) : null}
+              </div>
+            );
+          }}
+        </form.Field>
+
+        <form.Field
+          name="email"
+          validators={{
+            onBlur: contactFormSchema.shape.email,
+            onChange: contactFormSchema.shape.email,
+          }}
+        >
+          {(field) => {
+            const errorMessage = getErrorMessage(field.state.meta.errors[0]);
+
+            return (
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-foreground mb-2"
+                >
+                  Email
+                </label>
+                <Input
+                  id="email"
+                  name={field.name}
+                  type="email"
+                  required
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  placeholder="your@email.com"
+                  className="w-full bg-background border-border focus:border-green-accent focus:ring-green-accent"
+                />
+                {field.state.meta.isTouched && errorMessage ? (
+                  <p className="mt-2 text-sm text-destructive">
+                    {errorMessage}
+                  </p>
+                ) : null}
+              </div>
+            );
+          }}
+        </form.Field>
+      </div>
+
+      <form.Field
+        name="message"
+        validators={{
+          onBlur: contactFormSchema.shape.message,
+          onChange: contactFormSchema.shape.message,
+        }}
+      >
+        {(field) => {
+          const errorMessage = getErrorMessage(field.state.meta.errors[0]);
+
+          return (
             <div>
               <label
-                htmlFor="name"
+                htmlFor="message"
                 className="block text-sm font-medium text-foreground mb-2"
               >
-                Name
+                Message
               </label>
-              <Input
-                id="name"
-                name="name"
-                type="text"
+              <Textarea
+                id="message"
+                name={field.name}
                 required
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your name"
-                className="w-full bg-background border-border focus:border-green-accent focus:ring-green-accent"
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={(e) => field.handleChange(e.target.value)}
+                placeholder="Tell me about your project..."
+                rows={5}
+                className="w-full resize-none bg-background border-border focus:border-green-accent focus:ring-green-accent"
               />
+              {field.state.meta.isTouched && errorMessage ? (
+                <p className="mt-2 text-sm text-destructive">{errorMessage}</p>
+              ) : null}
             </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-foreground mb-2"
-              >
-                Email
-              </label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="your@email.com"
-                className="w-full bg-background border-border focus:border-green-accent focus:ring-green-accent"
-              />
-            </div>
-          </div>
+          );
+        }}
+      </form.Field>
 
-          <div>
-            <label
-              htmlFor="message"
-              className="block text-sm font-medium text-foreground mb-2"
-            >
-              Message
-            </label>
-            <Textarea
-              id="message"
-              name="message"
-              required
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Tell me about your project..."
-              rows={5}
-              className="w-full resize-none bg-background border-border focus:border-green-accent focus:ring-green-accent"
-            />
-          </div>
-
+      <form.Subscribe selector={(state) => [state.isSubmitting]}>
+        {([isSubmitting]) => (
           <button
             type="submit"
             disabled={isSubmitting}
@@ -143,8 +258,8 @@ export default function ContactForm() {
               </>
             )}
           </button>
-        </>
-      )}
+        )}
+      </form.Subscribe>
     </motion.form>
   );
 }

@@ -47,3 +47,4 @@ next-env.d.ts
 !.vscode/extensions.json
 
 dist
+.env*.local
