@@ -36,12 +36,10 @@ export default function WorkCard({ project, index }: WorkCardProps) {
               className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-300 group-hover:scale-105"
             />
 
-            <div className="absolute inset-0 bg-green-accent/30 mix-blend-multiply group-hover:bg-transparent transition-colors duration-300 pointer-events-none" />
-
             {/* Hover overlay */}
-            <div className="absolute inset-0 bg-foreground/5 group-hover:bg-foreground/10 transition-colors duration-300" />
+            <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/10 transition-colors duration-300" />
 
-            <div className="absolute top-4 right-4 rounded-full bg-background/70 p-2 backdrop-blur-xs">
+            <div className="absolute top-4 right-4 rounded-full bg-green-200 p-2 backdrop-blur-xs">
               <ArrowUpRight className="w-4 h-4 text-foreground" />
             </div>
           </div>

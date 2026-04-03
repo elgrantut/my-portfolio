@@ -7,6 +7,7 @@ export interface Project {
   liveUrl: string;
   githubUrl?: string;
   image: string;
+  headerImage: string;
   features: string[];
 }
 
@@ -33,6 +34,7 @@ export const projects: Project[] = [
     liveUrl: 'https://www.mawoopets.com/',
     githubUrl: 'https://github.com',
     image: '/images/mawoopets_small.webp',
+    headerImage: '/images/mawoopets_header.webp',
     features: [
       'Persistent shopping cart',
       'Stripe payments',
@@ -60,6 +62,7 @@ export const projects: Project[] = [
     liveUrl: 'https://influencermarketcap.com/',
     githubUrl: 'https://github.com',
     image: '/images/influencermarketcap-small.webp',
+    headerImage: '/images/influencermarketcap-header.webp',
     features: [
       'Real-time token metrics',
       'Interactive charts & rankings',
@@ -88,6 +91,7 @@ export const projects: Project[] = [
     liveUrl: 'https://www.xcadnetwork.com/',
     githubUrl: 'https://github.com',
     image: '/images/xcadnetwork-web-small.webp',
+    headerImage: '/images/xcadnetwork-web-header.webp',
     features: [
       'Smooth animations with GSAP',
       'Interactive data visualizations',
@@ -120,6 +124,7 @@ export const projects: Project[] = [
       'https://chromewebstore.google.com/detail/xcad-network/elcdacbfpnjajikgpenambffmmoimeea',
     githubUrl: 'https://github.com',
     image: '/images/extension-small.webp',
+    headerImage: '/images/extension-header.webp',
     features: [
       'Multi-platform support (Web, iOS, Android)',
       'Browser extension & mobile apps',
@@ -150,6 +155,7 @@ export const projects: Project[] = [
     liveUrl: 'https://www.xcad.social/en',
     githubUrl: 'https://github.com',
     image: '/images/xcad-social-small.webp',
+    headerImage: '/images/xcad-social-header.webp',
     features: [
       'AI content generation',
       'Real-time collaboration (Ably)',

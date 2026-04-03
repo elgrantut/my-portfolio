@@ -25,13 +25,13 @@ export default function Work() {
     <section
       ref={sectionRef}
       id="work"
-      className="relative py-16 sm:py-24 bg-secondary/30 overflow-hidden"
+      className="relative py-16 sm:py-24 bg-green-100 overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 grid-pattern opacity-20" />
       <motion.div
         style={{ y }}
-        className="absolute -top-32 -left-32 w-150 h-150 bg-green-accent/5 rounded-full blur-3xl"
+        className="absolute -top-32 -left-32 w-150 h-150 bg-green-accent/10 rounded-full blur-3xl"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

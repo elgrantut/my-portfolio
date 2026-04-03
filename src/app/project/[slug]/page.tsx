@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getProjectBySlug, projects } from '@/data/projects';
 import { Badge } from '@/components/ui/badge';
@@ -91,16 +92,18 @@ export default async function ProjectPage({ params }: Props) {
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        {/* Image placeholder */}
-        <div className="aspect-video bg-secondary rounded-xl mb-16 flex items-center justify-center border border-border overflow-hidden">
-          <div className="absolute inset-0 grid-pattern opacity-30" />
-          <div className="text-center relative">
-            <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-green-accent/10 border border-green-accent/20 flex items-center justify-center">
-              <ExternalLink className="w-10 h-10 text-green-accent" />
-            </div>
-            <p className="text-muted-foreground">Project preview</p>
-          </div>
-        </div>
+        {/* Project image */}
+        <Image
+          src={project.headerImage}
+          alt={project.title}
+          width={1024}
+          height={512}
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+          priority
+        />
 
         {/* Technologies */}
         <div className="mb-16">
