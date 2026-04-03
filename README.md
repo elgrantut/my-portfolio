@@ -10,18 +10,20 @@ bun dev
 
 ## Contact Form Setup
 
-The contact form validates input with Zod + TanStack Form and opens the visitor's email app with a prefilled draft (mailto flow).
+The contact form validates input with Zod + TanStack Form and sends emails through a Next.js API route using Resend.
 
-Create a `.env.local` file and set the destination email:
+Create a `.env.local` file and set:
 
 ```bash
-NEXT_PUBLIC_CONTACT_EMAIL=your-email@example.com
+RESEND_API_KEY=your_resend_api_key
+CONTACT_TO_EMAIL=your-email@example.com
+CONTACT_FROM_EMAIL=Portfolio Contact <onboarding@resend.dev>
 ```
 
 Notes:
 
-- This flow has no backend cost because it does not send emails from a server.
-- The visitor must confirm and send the email from their own email client.
+- `CONTACT_FROM_EMAIL` must use a sender allowed by your Resend account.
+- Base anti-abuse is enabled: honeypot + IP rate limit + duplicate submission cooldown.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

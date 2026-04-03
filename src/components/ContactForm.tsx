@@ -12,7 +12,6 @@ import {
   type ContactFormValues,
 } from '@/lib/contact-schema';
 
-const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
 const SUBMIT_COOL_DOWN_MS = 30_000;
 
 type ContactFormState = ContactFormValues & {
@@ -35,19 +34,6 @@ function getErrorMessage(error: unknown): string | undefined {
   return 'Invalid value';
 }
 
-function buildMailtoUrl(values: ContactFormValues): string {
-  const subject = `New portfolio contact - ${values.name}`;
-  const body = [
-    `Name: ${values.name.trim()}`,
-    `Email: ${values.email.trim()}`,
-    '',
-    'Message:',
-    values.message.trim(),
-  ].join('\n');
-
-  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
 export default function ContactForm() {
   const lastSubmitRef = useRef(0);
 
@@ -59,11 +45,6 @@ export default function ContactForm() {
       website: '',
     } as ContactFormState,
     onSubmit: async ({ value, formApi }) => {
-      if (!CONTACT_EMAIL) {
-        toast.error('Contact email is not configured yet.');
-        return;
-      }
-
       if (value.website.trim()) {
         toast.error('Unable to send message right now.');
         return;
@@ -84,13 +65,28 @@ export default function ContactForm() {
       }
 
       try {
-        const mailtoUrl = buildMailtoUrl(parsed.data);
-        window.open(mailtoUrl, '_self');
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(value),
+        });
+
+        const data: { message?: string } = await response
+          .json()
+          .catch(() => ({}));
+
+        if (!response.ok) {
+          toast.error(data.message ?? 'Could not send your message right now.');
+          return;
+        }
+
         lastSubmitRef.current = now;
-        toast.success('Your email app was opened with the message draft.');
+        toast.success(data.message ?? 'Message sent successfully.');
         formApi.reset();
       } catch {
-        toast.error('Could not open your email app. Please try again.');
+        toast.error('Could not send your message right now. Please try again.');
       }
     },
   });
