@@ -24,7 +24,9 @@ export default function ContactLinkCard({ link }: ContactLinkCardProps) {
           </div>
           <div>
             <p className="text-xs text-muted-foreground">{link.label}</p>
-            <p className="font-medium text-foreground text-sm">{link.value}</p>
+            <p className="font-medium text-foreground text-sm md:max-w-48 md:truncate">
+              {link.value}
+            </p>
           </div>
         </div>
         <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-green-accent transition-colors" />

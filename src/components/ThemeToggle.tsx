@@ -1,41 +1,21 @@
 'use client';
 
 import { Sun, Moon } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { useTheme } from '@/context/ThemeContext';
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
+  const { toggleTheme } = useTheme();
 
   return (
     <button
       onClick={toggleTheme}
       className="relative p-2 rounded-full bg-secondary hover:bg-secondary/80 transition-colors"
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      aria-label="Toggle theme"
     >
-      <AnimatePresence mode="wait" initial={false}>
-        {theme === 'light' ? (
-          <motion.div
-            key="sun"
-            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-            animate={{ opacity: 1, rotate: 0, scale: 1 }}
-            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Sun className="w-5 h-5 text-foreground" />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="moon"
-            initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
-            animate={{ opacity: 1, rotate: 0, scale: 1 }}
-            exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Moon className="w-5 h-5 text-foreground" />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <span className="relative block h-5 w-5">
+        <Sun className="h-5 w-5 text-foreground transition-all duration-200 dark:rotate-90 dark:scale-0" />
+        <Moon className="absolute inset-0 h-5 w-5 text-foreground rotate-90 scale-0 transition-all duration-200 dark:rotate-0 dark:scale-100" />
+      </span>
     </button>
   );
 }
