@@ -19,7 +19,8 @@ export default function Work() {
     offset: ['start end', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const orb_left = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const orb_right = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
     <section
@@ -29,9 +30,15 @@ export default function Work() {
     >
       {/* Background */}
       <div className="absolute inset-0 opacity-20" />
+      {/* Gradient orbs */}
       <motion.div
-        style={{ y }}
+        style={{ y: orb_left }}
         className="absolute -top-32 -left-32 w-150 h-150 bg-emerald-100/50 dark:bg-emerald-500/20 rounded-full blur-3xl"
+      />
+
+      <motion.div
+        style={{ y: orb_right }}
+        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/20  rounded-full blur-3xl"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
