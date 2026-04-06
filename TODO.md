@@ -2,9 +2,11 @@
 
 - [x] Connect Contact email form.
 - [x] Product page Image Header.
-- [ ] Update About section text and image.
+- [x] Update About section text and image.
 - [ ] Hook up production values for resend service.
+- [ ] Fix dark mode styles.
 
 ## Future improvements
 
 - [ ] Translations and toggle.
+- [ ] Hero animations.

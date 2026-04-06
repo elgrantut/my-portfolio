@@ -1,14 +1,11 @@
-import {
-  Mail,
-  Github,
-  Twitter,
-  Linkedin,
-  MapPin,
-  LucideIcon,
-} from 'lucide-react';
+import { LinkedinIcon } from '@/components/icons/LinkedinIcon';
+import { Mail, MapPin } from 'lucide-react';
+import { IconComponent } from '@/types/components';
+import { GithubIcon } from '@/components/icons/GithubIcon';
+import { XIcon } from '@/components/icons/XIcon';
 
 export interface ContactLink {
-  icon: LucideIcon;
+  icon: IconComponent;
   label: string;
   value: string;
   href: string | null;
@@ -22,22 +19,22 @@ export const contactLinks: ContactLink[] = [
     href: 'mailto:sanchez-matias-j@proton.me',
   },
   {
-    icon: Github,
+    icon: GithubIcon,
     label: 'GitHub',
     value: 'github.com/elgrantut',
     href: 'https://github.com/elgrantut/my-portfolio',
   },
   {
-    icon: Twitter,
+    icon: XIcon,
     label: 'Twitter',
     value: '@tute_sanchez',
     href: 'https://x.com/tute_sanchez',
   },
   {
-    icon: Linkedin,
+    icon: LinkedinIcon,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/tute_sanchez',
-    href: 'https://linkedin.com/in/tute_sanchez',
+    value: 'linkedin.com/in/sanchez-matias-j',
+    href: 'https://www.linkedin.com/in/sanchez-matias-j',
   },
   {
     icon: MapPin,
