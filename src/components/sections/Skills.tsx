@@ -24,7 +24,7 @@ export default function Skills() {
       <div className="absolute inset-0 grid-pattern opacity-30" />
       <motion.div
         style={{ y }}
-        className="absolute bottom-0 right-0 w-125 h-125 bg-green-accent/5 rounded-full blur-3xl"
+        className="absolute bottom-0 right-0 w-125 h-125 bg-emerald-500/5 rounded-full blur-3xl"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,7 +35,7 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5 }}
-            className="inline-block text-xs font-medium tracking-widest uppercase text-green-accent mb-6"
+            className="inline-block text-xs font-medium tracking-widest uppercase text-emerald-500 mb-6"
           >
             Skills & Technologies
           </motion.span>
@@ -74,11 +74,11 @@ export default function Skills() {
                 duration: 0.5,
                 delay: categoryIndex * 0.1,
               }}
-              className="group bg-card rounded-xl p-6 lg:p-8 border border-border hover:border-green-accent/30 transition-colors duration-300"
+              className="group bg-card rounded-xl p-6 lg:p-8 border border-border hover:border-emerald-500/30 transition-colors duration-300"
             >
               <div className="mb-8">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-2 h-2 rounded-full bg-green-accent" />
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
                   <h3 className="text-lg font-semibold text-foreground">
                     {category.title}
                   </h3>
@@ -127,7 +127,7 @@ export default function Skills() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: 0.5 + index * 0.05 }}
-                className="px-4 py-2 text-sm font-medium text-foreground bg-secondary rounded-full border border-border hover:border-green-accent/30 transition-colors"
+                className="px-4 py-2 text-sm font-medium text-foreground bg-secondary rounded-full border border-border hover:border-emerald-500/30 transition-colors"
               >
                 {skill}
               </motion.span>

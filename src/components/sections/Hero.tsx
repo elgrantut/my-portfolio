@@ -13,10 +13,10 @@ export default function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const orb_left = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
+  const orb_right = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
     <section
@@ -28,12 +28,12 @@ export default function Hero() {
 
       {/* Gradient orbs */}
       <motion.div
-        style={{ y }}
-        className="absolute top-1/4 -left-32 w-96 h-96 bg-green-accent/10 rounded-full blur-3xl"
+        style={{ y: orb_left }}
+        className="absolute top-1/4 -left-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"
       />
       <motion.div
-        style={{ y: textY }}
-        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-green-accent/5 rounded-full blur-3xl"
+        style={{ y: orb_right }}
+        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl"
       />
 
       {/* Content */}
@@ -46,10 +46,10 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium text-green-accent border border-green-accent/30 rounded-full mb-8">
+          <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium text-emerald-500 border border-emerald-500/30 rounded-full mb-8">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-accent opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-accent"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             Available for work
           </span>
@@ -98,7 +98,7 @@ export default function Hero() {
               e.preventDefault();
               scrollTo('#contact');
             }}
-            className="px-8 py-3.5 border border-border font-medium rounded-full bg-white hover:bg-secondary transition-all hover:scale-105"
+            className="px-8 py-3.5 border border-emerald-400 dark:border-emerald-300 font-medium rounded-full bg-emerald-300 dark:bg-emerald-600 text-white hover:bg-emerald-400 transition-all hover:scale-105"
           >
             Get in touch
           </a>
@@ -117,9 +117,9 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="p-2 border border-border rounded-full"
+          className="p-2 border border-emerald-700 dark:border-emerald-400 rounded-full"
         >
-          <ArrowDown className="w-4 h-4" />
+          <ArrowDown className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
         </motion.div>
       </motion.button>
 

@@ -25,7 +25,7 @@ export default function Contact() {
       <div className="absolute inset-0 grid-pattern opacity-20" />
       <motion.div
         style={{ y }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-green-accent/5 rounded-full blur-3xl"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-emerald-500/5 rounded-full blur-3xl"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,7 +36,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5 }}
-            className="inline-block text-xs font-medium tracking-widest uppercase text-green-accent mb-6"
+            className="inline-block text-xs font-medium tracking-widest uppercase text-emerald-500 mb-6"
           >
             Get in Touch
           </motion.span>

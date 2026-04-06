@@ -16,10 +16,10 @@ export default function ContactLinkCard({ link }: ContactLinkCardProps) {
         href={link.href}
         target={isExternal ? '_blank' : undefined}
         rel={isExternal ? 'noopener noreferrer' : undefined}
-        className="flex items-center justify-between p-4 rounded-lg bg-card border border-border hover:border-green-accent/50 transition-all group h-full"
+        className="flex items-center justify-between p-4 rounded-lg bg-card border border-border hover:border-emerald-500/50 transition-all group h-full"
       >
         <div className="flex items-center gap-4">
-          <div className="p-2.5 rounded-lg bg-secondary text-muted-foreground group-hover:bg-green-accent/10 group-hover:text-green-accent transition-colors">
+          <div className="p-2.5 rounded-lg bg-secondary text-muted-foreground group-hover:bg-emerald-500/10 group-hover:text-emerald-500 transition-colors">
             <Icon className="w-5 h-5" />
           </div>
           <div>
@@ -29,7 +29,7 @@ export default function ContactLinkCard({ link }: ContactLinkCardProps) {
             </p>
           </div>
         </div>
-        <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-green-accent transition-colors" />
+        <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-emerald-500 transition-colors" />
       </a>
     );
   }

@@ -19,19 +19,26 @@ export default function Work() {
     offset: ['start end', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const orb_left = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const orb_right = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
     <section
       ref={sectionRef}
       id="work"
-      className="relative py-16 sm:py-24 bg-green-100 overflow-hidden"
+      className="relative py-16 sm:py-24 bg-emerald-200 dark:bg-emerald-950 overflow-hidden"
     >
       {/* Background */}
-      <div className="absolute inset-0 grid-pattern opacity-20" />
+      <div className="absolute inset-0 opacity-20" />
+      {/* Gradient orbs */}
       <motion.div
-        style={{ y }}
-        className="absolute -top-32 -left-32 w-150 h-150 bg-green-accent/10 rounded-full blur-3xl"
+        style={{ y: orb_left }}
+        className="absolute -top-32 -left-32 w-150 h-150 bg-emerald-100/50 dark:bg-emerald-500/20 rounded-full blur-3xl"
+      />
+
+      <motion.div
+        style={{ y: orb_right }}
+        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/20  rounded-full blur-3xl"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,7 +49,7 @@ export default function Work() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5 }}
-            className="inline-block text-xs font-medium tracking-widest uppercase text-green-accent mb-6"
+            className="inline-block text-xs font-medium tracking-widest uppercase text-emerald-500 mb-6"
           >
             Selected Work
           </motion.span>
@@ -52,7 +59,7 @@ export default function Work() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-black dark:text-white mb-6"
           >
             Projects
           </motion.h2>
@@ -94,8 +101,8 @@ export default function Work() {
               ))}
             </CarouselContent>
             <div className="flex justify-center gap-2 mt-12">
-              <CarouselPrevious className="static translate-y-0 h-10 w-10 bg-card border-border hover:bg-secondary hover:text-foreground" />
-              <CarouselNext className="static translate-y-0 h-10 w-10 bg-card border-border hover:bg-secondary hover:text-foreground" />
+              <CarouselPrevious className="static translate-y-0 h-10 w-10 bg-card border-border dark:border-emerald-900 hover:bg-secondary hover:dark:bg-emerald-800  hover:text-foreground" />
+              <CarouselNext className="static translate-y-0 h-10 w-10 bg-card border-border dark:border-emerald-900 hover:bg-secondary hover:dark:bg-emerald-800  hover:text-foreground" />
             </div>
           </Carousel>
         </motion.div>

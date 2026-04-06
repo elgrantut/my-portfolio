@@ -4,7 +4,7 @@
 - [x] Product page Image Header.
 - [x] Update About section text and image.
 - [ ] Hook up production values for resend service.
-- [ ] Fix dark mode styles.
+- [x] Fix dark mode styles.
 
 ## Future improvements
 
