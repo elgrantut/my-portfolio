@@ -15,8 +15,8 @@ export const contactLinks: ContactLink[] = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'sanchez-matias-j@proton.me',
-    href: 'mailto:sanchez-matias-j@proton.me',
+    value: 'contact@masanche.dev',
+    href: 'mailto:contact@masanche.dev',
   },
   {
     icon: GithubIcon,
