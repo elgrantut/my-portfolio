@@ -29,11 +29,11 @@ export default function Hero() {
       {/* Gradient orbs */}
       <motion.div
         style={{ y }}
-        className="absolute top-1/4 -left-32 w-96 h-96 bg-green-accent/10 rounded-full blur-3xl"
+        className="absolute top-1/4 -left-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"
       />
       <motion.div
         style={{ y: textY }}
-        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-green-accent/5 rounded-full blur-3xl"
+        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl"
       />
 
       {/* Content */}
@@ -46,10 +46,10 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium text-green-accent border border-green-accent/30 rounded-full mb-8">
+          <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium text-emerald-500 border border-emerald-500/30 rounded-full mb-8">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-accent opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-accent"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             Available for work
           </span>
@@ -98,7 +98,7 @@ export default function Hero() {
               e.preventDefault();
               scrollTo('#contact');
             }}
-            className="px-8 py-3.5 border border-border font-medium rounded-full bg-white hover:bg-secondary transition-all hover:scale-105"
+            className="px-8 py-3.5 border border-emerald-500 font-medium rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-all hover:scale-105"
           >
             Get in touch
           </a>

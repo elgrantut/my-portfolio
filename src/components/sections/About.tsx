@@ -24,7 +24,7 @@ export default function About() {
       <div className="absolute inset-0 grid-pattern opacity-30" />
       <motion.div
         style={{ opacity, y }}
-        className="absolute top-0 right-0 w-125 h-125 bg-green-accent/5 rounded-full blur-3xl"
+        className="absolute top-0 right-0 w-125 h-125 bg-emerald-500/5 rounded-full blur-3xl"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,7 +36,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5 }}
-              className="inline-block text-xs font-medium tracking-widest uppercase text-green-accent mb-6"
+              className="inline-block text-xs font-medium tracking-widest uppercase text-emerald-500 mb-6"
             >
               About
             </motion.span>
@@ -112,8 +112,8 @@ export default function About() {
                 className="absolute -bottom-4 -right-4 sm:bottom-0 sm:right-0 bg-card border border-border rounded-xl px-4 py-3 shadow-lg"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-green-accent/10 flex items-center justify-center">
-                    <span className="text-green-accent text-lg">✓</span>
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center">
+                    <span className="text-emerald-500 text-lg">✓</span>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-foreground">

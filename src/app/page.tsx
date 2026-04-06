@@ -21,7 +21,7 @@ export default function Home() {
               &copy; {new Date().getFullYear()} Portfolio. All rights reserved.
             </p>
             <p className="text-sm text-muted-foreground">
-              Built with <span className="text-green-accent">Next.js</span>,
+              Built with <span className="text-emerald-500">Next.js</span>,
               Tailwind CSS & Motion
             </p>
           </div>

@@ -76,9 +76,9 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             <Link
               href="/"
-              className="text-lg font-semibold tracking-tight hover:text-green-accent transition-colors"
+              className="text-lg font-semibold tracking-tight hover:text-emerald-500 transition-colors"
             >
-              Portfolio<span className="text-green-accent">.</span>
+              Portfolio<span className="text-emerald-500">.</span>
             </Link>
 
             <nav className="hidden md:flex items-center gap-8">
@@ -90,7 +90,7 @@ export default function Header() {
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-green-accent transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-emerald-500 transition-all duration-300 group-hover:w-full" />
                 </Link>
               ))}
             </nav>
@@ -154,7 +154,7 @@ export default function Header() {
                     <Link
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className="block py-4 text-3xl font-semibold text-foreground hover:text-green-accent transition-colors border-b border-border"
+                      className="block py-4 text-3xl font-semibold text-foreground hover:text-emerald-500 transition-colors border-b border-border"
                     >
                       {link.label}
                     </Link>
@@ -174,7 +174,7 @@ export default function Header() {
                 </p>
                 <a
                   href="mailto:sanchez-matias-j@proton.me"
-                  className="text-lg font-medium text-foreground hover:text-green-accent transition-colors"
+                  className="text-lg font-medium text-foreground hover:text-emerald-500 transition-colors"
                 >
                   sanchez-matias-j@proton.me
                 </a>

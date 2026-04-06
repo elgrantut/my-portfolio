@@ -146,7 +146,7 @@ export default function ContactForm() {
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                   placeholder="Your name"
-                  className="w-full bg-background border-border focus:border-green-accent focus:ring-green-accent"
+                  className="w-full bg-background border-border focus:border-emerald-500 focus:ring-emerald-500"
                 />
                 {field.state.meta.isTouched && errorMessage ? (
                   <p className="mt-2 text-sm text-destructive">
@@ -185,7 +185,7 @@ export default function ContactForm() {
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                   placeholder="your@email.com"
-                  className="w-full bg-background border-border focus:border-green-accent focus:ring-green-accent"
+                  className="w-full bg-background border-border focus:border-emerald-500 focus:ring-emerald-500"
                 />
                 {field.state.meta.isTouched && errorMessage ? (
                   <p className="mt-2 text-sm text-destructive">
@@ -225,7 +225,7 @@ export default function ContactForm() {
                 onChange={(e) => field.handleChange(e.target.value)}
                 placeholder="Tell me about your project..."
                 rows={5}
-                className="w-full resize-none bg-background border-border focus:border-green-accent focus:ring-green-accent"
+                className="w-full resize-none bg-background border-border focus:border-emerald-500 focus:ring-emerald-500"
               />
               {field.state.meta.isTouched && errorMessage ? (
                 <p className="mt-2 text-sm text-destructive">{errorMessage}</p>

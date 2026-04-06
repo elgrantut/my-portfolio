@@ -107,7 +107,7 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* Technologies */}
         <div className="mb-16">
-          <h2 className="text-xs font-medium tracking-widest uppercase text-green-accent mb-4">
+          <h2 className="text-xs font-medium tracking-widest uppercase text-emerald-500 mb-4">
             Technologies
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -125,7 +125,7 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* Description */}
         <div className="mb-16">
-          <h2 className="text-xs font-medium tracking-widest uppercase text-green-accent mb-4">
+          <h2 className="text-xs font-medium tracking-widest uppercase text-emerald-500 mb-4">
             About this project
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -135,7 +135,7 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* Features */}
         <div>
-          <h2 className="text-xs font-medium tracking-widest uppercase text-green-accent mb-6">
+          <h2 className="text-xs font-medium tracking-widest uppercase text-emerald-500 mb-6">
             Key features
           </h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -144,7 +144,7 @@ export default async function ProjectPage({ params }: Props) {
                 key={feature}
                 className="flex items-start gap-3 p-4 rounded-lg bg-secondary/50 border border-border"
               >
-                <CheckCircle className="w-5 h-5 text-green-accent shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
                 <span className="text-foreground">{feature}</span>
               </li>
             ))}
