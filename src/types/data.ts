@@ -2,9 +2,6 @@ import type { IconComponent } from '@/types/components';
 
 export interface Project {
   slug: string;
-  title: string;
-  description: string;
-  longDescription: string;
   technologies: string[];
   liveUrl: string;
   githubUrl?: string;
@@ -12,6 +9,14 @@ export interface Project {
   headerImage: string;
   features: string[];
 }
+
+export interface ProjectContent {
+  title: string;
+  description: string;
+  longDescription: string;
+}
+
+export type ProjectWithContent = Project & ProjectContent;
 
 export interface Skill {
   name: string;

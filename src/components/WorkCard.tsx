@@ -10,6 +10,9 @@ import type { WorkCardProps } from '@/types/props';
 
 export default function WorkCard({ project, index }: WorkCardProps) {
   const t = useTranslations();
+  const projectContent = t.projects[project.slug as keyof typeof t.projects];
+  const title = projectContent?.title ?? project.slug;
+  const description = projectContent?.description ?? '';
 
   return (
     <motion.div
@@ -28,7 +31,7 @@ export default function WorkCard({ project, index }: WorkCardProps) {
 
             <Image
               src={project.image}
-              alt={`${project.title} preview`}
+              alt={`${title} preview`}
               fill
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
               className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-300 group-hover:scale-105"
@@ -48,13 +51,13 @@ export default function WorkCard({ project, index }: WorkCardProps) {
           <div className="flex items-start justify-between gap-4 mb-3">
             <Link href={`/project/${project.slug}`} className="block flex-1">
               <h3 className="text-lg font-semibold text-foreground group-hover:text-emerald-500 transition-colors line-clamp-1">
-                {project.title}
+                {title}
               </h3>
             </Link>
           </div>
 
           <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-            {project.description}
+            {description}
           </p>
 
           {/* Technologies */}
