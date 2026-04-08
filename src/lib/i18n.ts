@@ -5,6 +5,10 @@ import { initReactI18next } from 'react-i18next';
 import { en } from '@/data/i18n/en';
 import { es } from '@/data/i18n/es';
 
+export const supportedLanguages = ['en', 'es'] as const;
+export type Language = (typeof supportedLanguages)[number];
+export type TranslationDictionary = typeof en;
+
 if (!i18n.isInitialized) {
   void i18n.use(initReactI18next).init({
     resources: {

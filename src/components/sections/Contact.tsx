@@ -86,9 +86,11 @@ export default function Contact() {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
               {contactLinks.map((link, index) => {
+                const labelKey =
+                  link.label as keyof typeof t.contact.linkLabels;
                 const translatedLink = {
                   ...link,
-                  label: t.contact.linkLabels[link.label] ?? link.label,
+                  label: t.contact.linkLabels[labelKey] ?? link.label,
                   value:
                     link.label === 'Location'
                       ? t.contact.locationValue

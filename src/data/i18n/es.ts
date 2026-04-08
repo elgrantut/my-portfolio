@@ -1,6 +1,6 @@
-import type { Translations } from './types';
+import { en } from './en';
 
-export const es: Translations = {
+export const es = {
   nav: {
     about: 'Sobre mi',
     work: 'Proyectos',
@@ -124,4 +124,4 @@ export const es: Translations = {
     messageMin: 'El mensaje debe tener al menos 10 caracteres',
     messageMax: 'El mensaje debe tener como máximo 1200 caracteres',
   },
-};
+} satisfies typeof en;

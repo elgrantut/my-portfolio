@@ -65,43 +65,48 @@ export default function Skills() {
 
         {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{
-                duration: 0.5,
-                delay: categoryIndex * 0.1,
-              }}
-              className="group bg-card rounded-xl p-6 lg:p-8 border border-border hover:border-emerald-500/30 transition-colors duration-300"
-            >
-              <div className="mb-8">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {t.skills.categoryTitles[category.title] ?? category.title}
-                  </h3>
-                </div>
-                <p className="text-sm text-muted-foreground pl-5">
-                  {t.skills.categoryDescriptions[category.title] ??
-                    category.description}
-                </p>
-              </div>
+          {skillCategories.map((category, categoryIndex) => {
+            const categoryKey =
+              category.title as keyof typeof t.skills.categoryTitles;
 
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    level={skill.level}
-                    index={skillIndex + categoryIndex * 4}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          ))}
+            return (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{
+                  duration: 0.5,
+                  delay: categoryIndex * 0.1,
+                }}
+                className="group bg-card rounded-xl p-6 lg:p-8 border border-border hover:border-emerald-500/30 transition-colors duration-300"
+              >
+                <div className="mb-8">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {t.skills.categoryTitles[categoryKey] ?? category.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground pl-5">
+                    {t.skills.categoryDescriptions[categoryKey] ??
+                      category.description}
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  {category.skills.map((skill, skillIndex) => (
+                    <SkillBar
+                      key={skill.name}
+                      name={skill.name}
+                      level={skill.level}
+                      index={skillIndex + categoryIndex * 4}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Soft skills */}
