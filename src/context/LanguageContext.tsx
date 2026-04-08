@@ -2,14 +2,14 @@
 
 import { useEffect, type ReactNode } from 'react';
 import { I18nextProvider, useTranslation } from 'react-i18next';
-import { i18n, type Language } from '@/lib/i18n';
+import { i18n, resolveLanguage, type Language } from '@/lib/i18n';
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const syncLanguage = (nextLanguage: string) => {
-      const resolvedLanguage = nextLanguage === 'es' ? 'es' : 'en';
-      document.documentElement.lang = resolvedLanguage;
-      localStorage.setItem('language', resolvedLanguage);
+      const resolved = resolveLanguage(nextLanguage);
+      document.documentElement.lang = resolved;
+      localStorage.setItem('language', resolved);
     };
 
     const savedLanguage = localStorage.getItem('language');
@@ -31,8 +31,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
 export function useLanguage() {
   const { i18n: instance } = useTranslation();
-  const language: Language =
-    (instance.resolvedLanguage ?? instance.language) === 'es' ? 'es' : 'en';
+  const language: Language = resolveLanguage(
+    instance.resolvedLanguage ?? instance.language,
+  );
 
   return {
     language,

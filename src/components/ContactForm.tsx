@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { useForm } from '@tanstack/react-form';
 import { motion } from 'motion/react';
 import { toast } from 'sonner';
@@ -37,7 +37,10 @@ function getErrorMessage(error: unknown): string | undefined {
 
 export default function ContactForm() {
   const t = useTranslations();
-  const contactFormSchema = createContactFormSchema(t.validation);
+  const contactFormSchema = useMemo(
+    () => createContactFormSchema(t.validation),
+    [t.validation],
+  );
   const lastSubmitRef = useRef(0);
 
   const form = useForm({

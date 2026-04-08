@@ -9,6 +9,10 @@ export const supportedLanguages = ['en', 'es'] as const;
 export type Language = (typeof supportedLanguages)[number];
 export type TranslationDictionary = typeof en;
 
+export function resolveLanguage(raw: string | undefined): Language {
+  return raw === 'es' ? 'es' : 'en';
+}
+
 if (!i18n.isInitialized) {
   void i18n.use(initReactI18next).init({
     resources: {
