@@ -2,15 +2,19 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, ExternalLink, Github, CheckCircle } from 'lucide-react';
-import { useTranslations } from '@/hooks/useTranslations';
-import type { ProjectPageContentProps } from '@/types/props';
+import { ArrowLeft, ExternalLink, CheckCircle } from 'lucide-react';
 
-export default function ProjectPageContent({
-  project,
-}: ProjectPageContentProps) {
+import { Badge } from '@/components/ui/badge';
+import { useTranslations } from '@/hooks/useTranslations';
+import type { ProjectContentProps } from '@/types/props';
+import { GithubIcon } from '@/components/icons/GithubIcon';
+
+export default function ProjectContent({ project }: ProjectContentProps) {
   const t = useTranslations();
+  const projectContent = t.projects[project.slug as keyof typeof t.projects];
+  const title = projectContent?.title ?? project.slug;
+  const description = projectContent?.description ?? '';
+  const longDescription = projectContent?.longDescription ?? '';
 
   return (
     <div className="min-h-screen bg-background">
@@ -26,10 +30,10 @@ export default function ProjectPageContent({
           </Link>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground mb-6">
-            {project.title}
+            {title}
           </h1>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl">
-            {project.description}
+            {description}
           </p>
 
           <div className="flex flex-wrap gap-3 mt-10">
@@ -50,7 +54,7 @@ export default function ProjectPageContent({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 border border-border bg-background font-medium rounded-lg hover:bg-secondary transition-colors"
               >
-                <Github className="w-4 h-4" />
+                <GithubIcon className="w-4 h-4" />
                 {t.project.viewCode}
               </a>
             )}
@@ -61,7 +65,7 @@ export default function ProjectPageContent({
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <Image
           src={project.headerImage}
-          alt={project.title}
+          alt={title}
           width={1024}
           height={512}
           style={{
@@ -93,7 +97,7 @@ export default function ProjectPageContent({
             {t.project.aboutThisProject}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            {project.longDescription}
+            {longDescription}
           </p>
         </div>
 
