@@ -28,6 +28,10 @@ if (!i18n.isInitialized) {
     },
     returnObjects: true,
   });
+} else {
+  // Keep bundles in sync during HMR so server/client don't render stale keys.
+  i18n.addResourceBundle('en', 'translation', en, true, true);
+  i18n.addResourceBundle('es', 'translation', es, true, true);
 }
 
 export { i18n };

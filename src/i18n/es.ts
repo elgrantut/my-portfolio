@@ -108,6 +108,7 @@ export const es = {
   footer: {
     rightsReserved: 'Todos los derechos reservados.',
     builtWith: 'Desarrollado con',
+    built: 'Hecho en {{year}} con ❤️ por Matias usando ',
   },
   project: {
     backToProjects: 'Volver a proyectos',

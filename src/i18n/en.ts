@@ -1,3 +1,5 @@
+import { text } from 'stream/consumers';
+
 export const en = {
   nav: {
     about: 'About',
@@ -105,6 +107,7 @@ export const en = {
   footer: {
     rightsReserved: 'All rights reserved.',
     builtWith: 'Built with',
+    built: 'Built in {{year}} with ❤️ by Matias using ',
   },
   project: {
     backToProjects: 'Back to projects',
