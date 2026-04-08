@@ -3,8 +3,10 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
 import { useRef } from 'react';
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function About() {
+  const t = useTranslations();
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -38,7 +40,7 @@ export default function About() {
               transition={{ duration: 0.5 }}
               className="inline-block text-xs font-medium tracking-widest uppercase text-emerald-500 mb-6"
             >
-              About
+              {t.about.label}
             </motion.span>
 
             <motion.h2
@@ -48,9 +50,11 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground mb-8"
             >
-              Hi, I’m Matías — a{' '}
-              <span className="text-muted-foreground">frontend developer</span>{' '}
-              with a background in graphic design.
+              {t.about.headingPrefix}{' '}
+              <span className="text-muted-foreground">
+                {t.about.headingHighlight}
+              </span>{' '}
+              {t.about.headingSuffix}
             </motion.h2>
 
             <motion.div
@@ -60,21 +64,9 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="space-y-6 text-muted-foreground"
             >
-              <p className="text-lg leading-relaxed">
-                Over the past few years, I’ve been building web applications
-                using React, Next.js, TypeScript, and Node.js, mainly in
-                e-commerce and Web3 projects.
-              </p>
+              <p className="text-lg leading-relaxed">{t.about.paragraph1}</p>
 
-              <p className="text-lg leading-relaxed">
-                I enjoy creating products that are simple, fast, and easy to
-                use. Because I started in design, I naturally think about both
-                how things work and how they feel for the user. I like being
-                involved in the full process — from understanding the problem to
-                building and improving features. I’m comfortable working
-                remotely with international teams and enjoy clear communication,
-                collaboration, and ownership.
-              </p>
+              <p className="text-lg leading-relaxed">{t.about.paragraph2}</p>
             </motion.div>
           </div>
 
@@ -117,10 +109,10 @@ export default function About() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-foreground">
-                      Based in
+                      {t.about.basedIn}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Argentina • GMT-3
+                      {t.about.location}
                     </p>
                   </div>
                 </div>

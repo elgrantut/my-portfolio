@@ -1,17 +1,20 @@
 import { z } from 'zod';
+import { en } from '@/i18n/en';
+import type {
+  ContactFormValues,
+  ContactValidationMessages,
+} from '@/types/forms';
 
-export const contactFormSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, 'Name must be at least 2 characters')
-    .max(80, 'Name must be at most 80 characters'),
-  email: z.string().trim().email('Please enter a valid email address'),
-  message: z
-    .string()
-    .trim()
-    .min(10, 'Message must be at least 10 characters')
-    .max(1200, 'Message must be at most 1200 characters'),
-});
+export function createContactFormSchema(messages: ContactValidationMessages) {
+  return z.object({
+    name: z.string().trim().min(2, messages.nameMin).max(80, messages.nameMax),
+    email: z.string().trim().email(messages.email),
+    message: z
+      .string()
+      .trim()
+      .min(10, messages.messageMin)
+      .max(1200, messages.messageMax),
+  });
+}
 
-export type ContactFormValues = z.infer<typeof contactFormSchema>;
+export const contactFormSchema = createContactFormSchema(en.validation);

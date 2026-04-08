@@ -1,9 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
-import { ContactLink } from '@/data/contact';
-
-interface ContactLinkCardProps {
-  link: ContactLink;
-}
+import type { ContactLinkCardProps } from '@/types/props';
 
 export default function ContactLinkCard({ link }: ContactLinkCardProps) {
   const Icon = link.icon;

@@ -4,8 +4,10 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { skillCategories } from '@/data/skills';
 import SkillBar from '@/components/SkillBar';
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function Skills() {
+  const t = useTranslations();
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -37,7 +39,7 @@ export default function Skills() {
             transition={{ duration: 0.5 }}
             className="inline-block text-xs font-medium tracking-widest uppercase text-emerald-500 mb-6"
           >
-            Skills & Technologies
+            {t.skills.label}
           </motion.span>
 
           <motion.h2
@@ -47,7 +49,7 @@ export default function Skills() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground mb-6"
           >
-            Tech Stack
+            {t.skills.title}
           </motion.h2>
 
           <motion.p
@@ -57,49 +59,54 @@ export default function Skills() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-xl mx-auto"
           >
-            Tools and technologies I use to build modern, high-performance
-            applications.
+            {t.skills.description}
           </motion.p>
         </div>
 
         {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{
-                duration: 0.5,
-                delay: categoryIndex * 0.1,
-              }}
-              className="group bg-card rounded-xl p-6 lg:p-8 border border-border hover:border-emerald-500/30 transition-colors duration-300"
-            >
-              <div className="mb-8">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {category.title}
-                  </h3>
-                </div>
-                <p className="text-sm text-muted-foreground pl-5">
-                  {category.description}
-                </p>
-              </div>
+          {skillCategories.map((category, categoryIndex) => {
+            const categoryKey =
+              category.title as keyof typeof t.skills.categoryTitles;
 
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    level={skill.level}
-                    index={skillIndex + categoryIndex * 4}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          ))}
+            return (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{
+                  duration: 0.5,
+                  delay: categoryIndex * 0.1,
+                }}
+                className="group bg-card rounded-xl p-6 lg:p-8 border border-border hover:border-emerald-500/30 transition-colors duration-300"
+              >
+                <div className="mb-8">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {t.skills.categoryTitles[categoryKey] ?? category.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground pl-5">
+                    {t.skills.categoryDescriptions[categoryKey] ??
+                      category.description}
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  {category.skills.map((skill, skillIndex) => (
+                    <SkillBar
+                      key={skill.name}
+                      name={skill.name}
+                      level={skill.level}
+                      index={skillIndex + categoryIndex * 4}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Soft skills */}
@@ -111,16 +118,10 @@ export default function Skills() {
           className="mt-16 text-center"
         >
           <p className="text-sm text-muted-foreground mb-6">
-            Also experienced in
+            {t.skills.alsoExperienced}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {[
-              'Problem Solving',
-              'Team Collaboration',
-              'Agile Methodologies',
-              'Code Review',
-              'Technical Writing',
-            ].map((skill, index) => (
+            {t.skills.softSkills.map((skill, index) => (
               <motion.span
                 key={skill}
                 initial={{ opacity: 0, scale: 0.9 }}

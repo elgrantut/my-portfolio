@@ -5,14 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
-import { Project } from '@/data/projects';
-
-interface WorkCardProps {
-  project: Project;
-  index: number;
-}
+import { useTranslations } from '@/hooks/useTranslations';
+import type { WorkCardProps } from '@/types/props';
 
 export default function WorkCard({ project, index }: WorkCardProps) {
+  const t = useTranslations();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -88,7 +86,7 @@ export default function WorkCard({ project, index }: WorkCardProps) {
             onClick={(e) => e.stopPropagation()}
             className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-emerald-500 transition-colors group/link"
           >
-            <span>Visit site</span>
+            <span>{t.work.visitSite}</span>
             <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
           </a>
         </div>

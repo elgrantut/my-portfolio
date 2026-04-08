@@ -5,8 +5,10 @@ import { useRef } from 'react';
 import ContactForm from '@/components/ContactForm';
 import ContactLinkCard from '@/components/ContactLinkCard';
 import { contactLinks } from '@/data/contact';
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function Contact() {
+  const t = useTranslations();
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -38,7 +40,7 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="inline-block text-xs font-medium tracking-widest uppercase text-emerald-500 mb-6"
           >
-            Get in Touch
+            {t.contact.label}
           </motion.span>
 
           <motion.h2
@@ -48,7 +50,7 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground mb-6"
           >
-            Let&apos;s work together
+            {t.contact.title}
           </motion.h2>
 
           <motion.p
@@ -58,8 +60,7 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-xl mx-auto"
           >
-            Have a project in mind? I&apos;d love to hear about it. Send me a
-            message and let&apos;s talk.
+            {t.contact.description}
           </motion.p>
         </div>
 
@@ -85,17 +86,27 @@ export default function Contact() {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
               {contactLinks.map((link, index) => {
+                const labelKey =
+                  link.label as keyof typeof t.contact.linkLabels;
+                const translatedLink = {
+                  ...link,
+                  label: t.contact.linkLabels[labelKey] ?? link.label,
+                  value:
+                    link.label === 'Location'
+                      ? t.contact.locationValue
+                      : link.value,
+                };
                 const isLast = index === contactLinks.length - 1;
                 return (
                   <motion.div
-                    key={link.label}
+                    key={translatedLink.label}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-50px' }}
                     transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
                     className={isLast ? 'md:col-span-2' : ''}
                   >
-                    <ContactLinkCard link={link} />
+                    <ContactLinkCard link={translatedLink} />
                   </motion.div>
                 );
               })}

@@ -1,22 +1,17 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { useForm } from '@tanstack/react-form';
 import { motion } from 'motion/react';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, Loader2 } from 'lucide-react';
-import {
-  contactFormSchema,
-  type ContactFormValues,
-} from '@/lib/contact-schema';
+import { createContactFormSchema } from '@/lib/contact-schema';
+import { useTranslations } from '@/hooks/useTranslations';
+import type { ContactFormState } from '@/types/forms';
 
 const SUBMIT_COOL_DOWN_MS = 30_000;
-
-type ContactFormState = ContactFormValues & {
-  website: string;
-};
 
 function getErrorMessage(error: unknown): string | undefined {
   if (!error) return undefined;
@@ -35,6 +30,11 @@ function getErrorMessage(error: unknown): string | undefined {
 }
 
 export default function ContactForm() {
+  const t = useTranslations();
+  const contactFormSchema = useMemo(
+    () => createContactFormSchema(t.validation),
+    [t.validation],
+  );
   const lastSubmitRef = useRef(0);
 
   const form = useForm({
@@ -46,21 +46,19 @@ export default function ContactForm() {
     } as ContactFormState,
     onSubmit: async ({ value, formApi }) => {
       if (value.website.trim()) {
-        toast.error('Unable to send message right now.');
+        toast.error(t.form.genericInvalid);
         return;
       }
 
       const now = Date.now();
       if (now - lastSubmitRef.current < SUBMIT_COOL_DOWN_MS) {
-        toast.error(
-          'Please wait a few seconds before sending another message.',
-        );
+        toast.error(t.form.cooldown);
         return;
       }
 
       const parsed = contactFormSchema.safeParse(value);
       if (!parsed.success) {
-        toast.error('Please review the highlighted fields.');
+        toast.error(t.form.reviewFields);
         return;
       }
 
@@ -78,15 +76,15 @@ export default function ContactForm() {
           .catch(() => ({}));
 
         if (!response.ok) {
-          toast.error(data.message ?? 'Could not send your message right now.');
+          toast.error(data.message ?? t.form.sendFailed);
           return;
         }
 
         lastSubmitRef.current = now;
-        toast.success(data.message ?? 'Message sent successfully.');
+        toast.success(data.message ?? t.form.sendSuccess);
         formApi.reset();
       } catch {
-        toast.error('Could not send your message right now. Please try again.');
+        toast.error(t.form.sendFailedTryAgain);
       }
     },
   });
@@ -135,7 +133,7 @@ export default function ContactForm() {
                   htmlFor="name"
                   className="block text-sm font-medium text-foreground mb-2"
                 >
-                  Name
+                  {t.form.name}
                 </label>
                 <Input
                   id="name"
@@ -145,7 +143,7 @@ export default function ContactForm() {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  placeholder="Your name"
+                  placeholder={t.form.namePlaceholder}
                   className="w-full bg-background border-border focus:border-emerald-500 focus:ring-emerald-500"
                 />
                 {field.state.meta.isTouched && errorMessage ? (
@@ -174,7 +172,7 @@ export default function ContactForm() {
                   htmlFor="email"
                   className="block text-sm font-medium text-foreground mb-2"
                 >
-                  Email
+                  {t.form.email}
                 </label>
                 <Input
                   id="email"
@@ -184,7 +182,7 @@ export default function ContactForm() {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  placeholder="your@email.com"
+                  placeholder={t.form.emailPlaceholder}
                   className="w-full bg-background border-border focus:border-emerald-500 focus:ring-emerald-500"
                 />
                 {field.state.meta.isTouched && errorMessage ? (
@@ -214,7 +212,7 @@ export default function ContactForm() {
                 htmlFor="message"
                 className="block text-sm font-medium text-foreground mb-2"
               >
-                Message
+                {t.form.message}
               </label>
               <Textarea
                 id="message"
@@ -223,7 +221,7 @@ export default function ContactForm() {
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
-                placeholder="Tell me about your project..."
+                placeholder={t.form.messagePlaceholder}
                 rows={5}
                 className="w-full resize-none bg-background border-border focus:border-emerald-500 focus:ring-emerald-500"
               />
@@ -245,12 +243,12 @@ export default function ContactForm() {
             {isSubmitting ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Sending...
+                {t.form.sending}
               </>
             ) : (
               <>
                 <Send className="w-4 h-4" />
-                Send message
+                {t.form.send}
               </>
             )}
           </button>

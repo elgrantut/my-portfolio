@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/context/ThemeContext';
+import { LanguageProvider } from '@/context/LanguageContext';
 import Header from '@/components/Header';
 import { Toaster } from 'sonner';
 
@@ -31,12 +32,14 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} font-sans min-h-screen bg-background text-foreground antialiased`}
       >
-        <ThemeProvider>
-          <div className="grain-overlay" />
-          <Header />
-          {children}
-          <Toaster position="top-right" richColors />
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <div className="grain-overlay" />
+            <Header />
+            {children}
+            <Toaster position="top-right" richColors />
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
