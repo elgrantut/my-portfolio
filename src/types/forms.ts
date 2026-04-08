@@ -9,4 +9,4 @@ export interface ContactFormState extends ContactFormValues {
 }
 
 export type ContactValidationMessages =
-  (typeof import('@/data/i18n/en').en)['validation'];
+  (typeof import('@/i18n/en').en)['validation'];

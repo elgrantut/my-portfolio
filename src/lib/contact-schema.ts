@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { en } from '@/data/i18n/en';
+import { en } from '@/i18n/en';
 import type {
   ContactFormValues,
   ContactValidationMessages,
