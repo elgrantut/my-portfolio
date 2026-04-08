@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { projects } from '@/data/projects';
 import WorkCard from '@/components/WorkCard';
+import { useTranslations } from '@/hooks/useTranslations';
 import {
   Carousel,
   CarouselContent,
@@ -13,6 +14,7 @@ import {
 } from '@/components/ui/carousel';
 
 export default function Work() {
+  const t = useTranslations();
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -51,7 +53,7 @@ export default function Work() {
             transition={{ duration: 0.5 }}
             className="inline-block text-xs font-medium tracking-widest uppercase text-emerald-500 mb-6"
           >
-            Selected Work
+            {t.work.label}
           </motion.span>
 
           <motion.h2
@@ -61,7 +63,7 @@ export default function Work() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-black dark:text-white mb-6"
           >
-            Projects
+            {t.work.title}
           </motion.h2>
 
           <motion.p
@@ -71,8 +73,7 @@ export default function Work() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-xl mx-auto"
           >
-            A selection of projects showcasing frontend development, UI/UX
-            design, and application architecture.
+            {t.work.description}
           </motion.p>
         </div>
 
@@ -115,7 +116,7 @@ export default function Work() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="text-center text-sm text-muted-foreground mt-8"
         >
-          Click on any card to see full project details
+          {t.work.instruction}
         </motion.p>
       </div>
     </section>

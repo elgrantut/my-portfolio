@@ -11,16 +11,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { X, Menu } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import LanguageToggle from './LanguageToggle';
 import { useLockBodyScroll, useMediaQuery, useScrollTo } from '@/hooks';
-
-const navLinks = [
-  { href: '/#about', label: 'About' },
-  { href: '/#work', label: 'Work' },
-  { href: '/#skills', label: 'Skills' },
-  { href: '/#contact', label: 'Contact' },
-];
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function Header() {
+  const t = useTranslations();
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,6 +24,12 @@ export default function Header() {
   const pathname = usePathname();
   const isDesktop = useMediaQuery('(min-width: 768px)');
   const scrollTo = useScrollTo();
+  const navLinks = [
+    { href: '/#about', label: t.nav.about },
+    { href: '/#work', label: t.nav.work },
+    { href: '/#skills', label: t.nav.skills },
+    { href: '/#contact', label: t.nav.contact },
+  ];
 
   // Derive visibility - menu auto-closes when switching to desktop
   const isMobileMenuVisible = mobileMenuOpen && !isDesktop;
@@ -96,13 +98,14 @@ export default function Header() {
             </nav>
 
             <div className="flex items-center gap-3">
+              <LanguageToggle />
               <ThemeToggle />
 
               {/* Mobile menu button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors"
-                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-label={mobileMenuOpen ? t.nav.menuClose : t.nav.menuOpen}
               >
                 {mobileMenuOpen ? (
                   <X className="w-5 h-5" />
@@ -170,7 +173,7 @@ export default function Header() {
                 className="mt-12 pt-8 border-t border-border"
               >
                 <p className="text-sm text-muted-foreground mb-4">
-                  Get in touch
+                  {t.nav.mobileContact}
                 </p>
                 <a
                   href="mailto:sanchez-matias-j@proton.me"
