@@ -12,8 +12,6 @@ export const es = {
   },
   language: {
     toggleLabel: 'Cambiar idioma',
-    switchToEnglish: 'Switch to English',
-    switchToSpanish: 'Cambiar a español',
     shortEn: 'EN',
     shortEs: 'ES',
   },

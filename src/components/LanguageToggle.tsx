@@ -8,15 +8,12 @@ export default function LanguageToggle() {
   const { language, toggleLanguage } = useLanguage();
   const t = useTranslations();
 
-  const nextLanguageLabel =
-    language === 'en' ? t.language.switchToSpanish : t.language.switchToEnglish;
-
   return (
     <button
       onClick={toggleLanguage}
       className="inline-flex items-center gap-1.5 p-2 rounded-full bg-secondary hover:bg-secondary/80 transition-colors"
-      aria-label={nextLanguageLabel}
-      title={nextLanguageLabel}
+      aria-label={t.language.toggleLabel}
+      title={t.language.toggleLabel}
     >
       <Languages className="h-5 w-5 text-foreground" />
       <span className="text-xs font-semibold text-foreground">

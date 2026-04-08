@@ -1,5 +1,3 @@
-import { text } from 'stream/consumers';
-
 export const en = {
   nav: {
     about: 'About',
@@ -12,8 +10,6 @@ export const en = {
   },
   language: {
     toggleLabel: 'Toggle language',
-    switchToEnglish: 'Switch to English',
-    switchToSpanish: 'Cambiar a español',
     shortEn: 'EN',
     shortEs: 'ES',
   },
