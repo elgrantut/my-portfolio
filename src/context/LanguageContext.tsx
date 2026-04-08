@@ -1,69 +1,47 @@
 'use client';
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from 'react';
-import { en } from '@/data/i18n/en';
-import { es } from '@/data/i18n/es';
-import type { Language, Translations } from '@/data/i18n/types';
-
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (language: Language) => void;
-  toggleLanguage: () => void;
-  translations: Translations;
-}
-
-const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined,
-);
-
-function getInitialLanguage(): Language {
-  if (typeof window === 'undefined') return 'en';
-
-  const savedLanguage = localStorage.getItem('language');
-  return savedLanguage === 'es' ? 'es' : 'en';
-}
-
-function getTranslations(language: Language): Translations {
-  return language === 'es' ? es : en;
-}
+import { useEffect, type ReactNode } from 'react';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import { i18n } from '@/lib/i18n';
+import type { Language } from '@/data/i18n/types';
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>(getInitialLanguage);
-
   useEffect(() => {
-    document.documentElement.lang = language;
-    localStorage.setItem('language', language);
-  }, [language]);
+    const syncLanguage = (nextLanguage: string) => {
+      const resolvedLanguage = nextLanguage === 'es' ? 'es' : 'en';
+      document.documentElement.lang = resolvedLanguage;
+      localStorage.setItem('language', resolvedLanguage);
+    };
 
-  const value = useMemo(
-    () => ({
-      language,
-      setLanguage,
-      toggleLanguage: () =>
-        setLanguage((prev) => (prev === 'en' ? 'es' : 'en')),
-      translations: getTranslations(language),
-    }),
-    [language],
-  );
+    const savedLanguage = localStorage.getItem('language');
+    if (savedLanguage === 'es' && i18n.language !== 'es') {
+      void i18n.changeLanguage('es');
+    } else {
+      syncLanguage(i18n.resolvedLanguage ?? i18n.language);
+    }
 
-  return (
-    <LanguageContext.Provider value={value}>
-      {children}
-    </LanguageContext.Provider>
-  );
+    i18n.on('languageChanged', syncLanguage);
+
+    return () => {
+      i18n.off('languageChanged', syncLanguage);
+    };
+  }, []);
+
+  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 }
 
 export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
+  const { i18n: instance } = useTranslation();
+  const language: Language =
+    (instance.resolvedLanguage ?? instance.language) === 'es' ? 'es' : 'en';
+
+  return {
+    language,
+    setLanguage: (nextLanguage: Language) => {
+      void instance.changeLanguage(nextLanguage);
+    },
+    toggleLanguage: () => {
+      void instance.changeLanguage(language === 'en' ? 'es' : 'en');
+    },
+  };
 }

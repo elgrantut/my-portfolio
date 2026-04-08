@@ -1,8 +1,12 @@
 'use client';
 
-import { useLanguage } from '@/context/LanguageContext';
+import { useTranslation } from 'react-i18next';
+import type { Language, Translations } from '@/data/i18n/types';
 
 export function useTranslations() {
-  const { translations } = useLanguage();
-  return translations;
+  const { i18n } = useTranslation();
+  const language: Language =
+    (i18n.resolvedLanguage ?? i18n.language) === 'es' ? 'es' : 'en';
+
+  return i18n.getResourceBundle(language, 'translation') as Translations;
 }

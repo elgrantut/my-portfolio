@@ -8,7 +8,7 @@
 
 ## Future improvements
 
-- [ ] Translations and toggle.
+- [x] Translations and toggle.
 - [ ] Hero animations.
 - [ ] Add one more font to the project design schema.
 - [ ] Add open-graph meta tags for better SEO and social media sharing.
