@@ -19,7 +19,7 @@ export interface WorkCardProps {
   index: number;
 }
 
-export interface ProjectPageContentProps {
+export interface ProjectContentProps {
   project: Project;
 }
 

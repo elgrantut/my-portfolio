@@ -2,15 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ExternalLink, CheckCircle } from 'lucide-react';
+
+import { Badge } from '@/components/ui/badge';
 import { useTranslations } from '@/hooks/useTranslations';
-import type { ProjectPageContentProps } from '@/types/props';
+import type { ProjectContentProps } from '@/types/props';
 import { GithubIcon } from '@/components/icons/GithubIcon';
 
-export default function ProjectPageContent({
-  project,
-}: ProjectPageContentProps) {
+export default function ProjectContent({ project }: ProjectContentProps) {
   const t = useTranslations();
   const projectContent = t.projects[project.slug as keyof typeof t.projects];
   const title = projectContent?.title ?? project.slug;

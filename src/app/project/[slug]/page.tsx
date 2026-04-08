@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getProjectBySlug, projects } from '@/data/projects';
-import ProjectPageContent from '@/components/ProjectPageContent';
+import ProjectContent from '@/components/ProjectContent';
 import { en } from '@/i18n/en';
 import type { ProjectPageParams } from '@/types/props';
 
@@ -38,5 +38,5 @@ export default async function ProjectPage({ params }: ProjectPageParams) {
     notFound();
   }
 
-  return <ProjectPageContent project={project} />;
+  return <ProjectContent project={project} />;
 }
