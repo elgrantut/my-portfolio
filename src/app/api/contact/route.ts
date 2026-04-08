@@ -2,15 +2,11 @@ import { createHash } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { contactFormSchema } from '@/lib/contact-schema';
+import type { RateLimitEntry } from '@/types/api';
 
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 3;
 const DEDUPE_WINDOW_MS = 300_000;
-
-type RateLimitEntry = {
-  count: number;
-  resetAt: number;
-};
 
 const rateLimitStore = new Map<string, RateLimitEntry>();
 const dedupeStore = new Map<string, number>();

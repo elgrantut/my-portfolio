@@ -1,15 +1,8 @@
 import { LinkedinIcon } from '@/components/icons/LinkedinIcon';
 import { Mail, MapPin } from 'lucide-react';
-import { IconComponent } from '@/types/components';
 import { GithubIcon } from '@/components/icons/GithubIcon';
 import { XIcon } from '@/components/icons/XIcon';
-
-export interface ContactLink {
-  icon: IconComponent;
-  label: string;
-  value: string;
-  href: string | null;
-}
+import type { ContactLink } from '@/types/data';
 
 export const contactLinks: ContactLink[] = [
   {

@@ -5,13 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
-import { Project } from '@/data/projects';
 import { useTranslations } from '@/hooks/useTranslations';
-
-interface WorkCardProps {
-  project: Project;
-  index: number;
-}
+import type { WorkCardProps } from '@/types/props';
 
 export default function WorkCard({ project, index }: WorkCardProps) {
   const t = useTranslations();

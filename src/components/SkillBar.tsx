@@ -1,12 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-
-interface SkillBarProps {
-  name: string;
-  level: number;
-  index: number;
-}
+import type { SkillBarProps } from '@/types/props';
 
 export default function SkillBar({ name, level, index }: SkillBarProps) {
   return (

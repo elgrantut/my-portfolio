@@ -4,10 +4,9 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { en } from '@/data/i18n/en';
 import { es } from '@/data/i18n/es';
+import type { Language } from '@/types/i18n';
 
-export const supportedLanguages = ['en', 'es'] as const;
-export type Language = (typeof supportedLanguages)[number];
-export type TranslationDictionary = typeof en;
+export const supportedLanguages: Language[] = ['en', 'es'];
 
 export function resolveLanguage(raw: string | undefined): Language {
   return raw === 'es' ? 'es' : 'en';

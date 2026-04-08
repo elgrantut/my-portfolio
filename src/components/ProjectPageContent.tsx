@@ -4,12 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ExternalLink, Github, CheckCircle } from 'lucide-react';
-import type { Project } from '@/data/projects';
 import { useTranslations } from '@/hooks/useTranslations';
-
-interface ProjectPageContentProps {
-  project: Project;
-}
+import type { ProjectPageContentProps } from '@/types/props';
 
 export default function ProjectPageContent({
   project,

@@ -2,12 +2,11 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getProjectBySlug, projects } from '@/data/projects';
 import ProjectPageContent from '@/components/ProjectPageContent';
+import type { ProjectPageParams } from '@/types/props';
 
-interface Props {
-  params: Promise<{ slug: string }>;
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProjectPageParams): Promise<Metadata> {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
@@ -29,7 +28,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ProjectPage({ params }: Props) {
+export default async function ProjectPage({ params }: ProjectPageParams) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 

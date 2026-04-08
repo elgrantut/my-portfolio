@@ -1,7 +1,8 @@
 'use client';
 
 import { useTranslation } from 'react-i18next';
-import { resolveLanguage, type Language, type TranslationDictionary } from '@/lib/i18n';
+import { resolveLanguage } from '@/lib/i18n';
+import { Language, TranslationDictionary } from '@/types/i18n';
 
 export function useTranslations() {
   const { i18n } = useTranslation();

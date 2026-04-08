@@ -1,10 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-
-interface AvailabilityCardProps {
-  delay?: number;
-}
+import type { AvailabilityCardProps } from '@/types/props';
 
 export default function AvailabilityCard({
   delay = 0.8,

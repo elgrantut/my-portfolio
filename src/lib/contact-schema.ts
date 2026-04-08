@@ -1,7 +1,9 @@
 import { z } from 'zod';
 import { en } from '@/data/i18n/en';
-
-type ContactValidationMessages = typeof en.validation;
+import type {
+  ContactFormValues,
+  ContactValidationMessages,
+} from '@/types/forms';
 
 export function createContactFormSchema(messages: ContactValidationMessages) {
   return z.object({
@@ -16,5 +18,3 @@ export function createContactFormSchema(messages: ContactValidationMessages) {
 }
 
 export const contactFormSchema = createContactFormSchema(en.validation);
-
-export type ContactFormValues = z.infer<typeof contactFormSchema>;

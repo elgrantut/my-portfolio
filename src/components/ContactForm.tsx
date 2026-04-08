@@ -7,17 +7,11 @@ import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, Loader2 } from 'lucide-react';
-import {
-  createContactFormSchema,
-  type ContactFormValues,
-} from '@/lib/contact-schema';
+import { createContactFormSchema } from '@/lib/contact-schema';
 import { useTranslations } from '@/hooks/useTranslations';
+import type { ContactFormState } from '@/types/forms';
 
 const SUBMIT_COOL_DOWN_MS = 30_000;
-
-type ContactFormState = ContactFormValues & {
-  website: string;
-};
 
 function getErrorMessage(error: unknown): string | undefined {
   if (!error) return undefined;
