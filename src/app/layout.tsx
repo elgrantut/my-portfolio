@@ -56,11 +56,11 @@ export const metadata: Metadata = {
       'Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive web applications with focus on performance, accessibility, and beautiful interfaces.',
     images: [
       {
-        url: '/images/og.png',
+        url: '/images/og.webp',
         width: 1200,
         height: 630,
         alt: 'Matias Sanchez - Frontend Developer & Web Designer',
-        type: 'image/png',
+        type: 'image/webp',
       },
     ],
   },
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     title: 'Matias Sanchez | Frontend Developer & Web Designer',
     description:
       'Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive web applications.',
-    images: ['/images/og.png'],
+    images: ['/images/og.webp'],
     creator: '@tuTwitter',
   },
   robots: {
