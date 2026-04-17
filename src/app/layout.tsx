@@ -16,7 +16,16 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
 });
 
-const siteUrl = 'https://matiassanchez.dev';
+const getBaseUrl = () => {
+  // Vercel preview deployments
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  // Production
+  return 'https://masanche.dev';
+};
+
+const siteUrl = getBaseUrl();
 
 export const metadata: Metadata = {
   title: 'Matias Sanchez | Frontend Developer & Web Designer',
@@ -33,14 +42,14 @@ export const metadata: Metadata = {
     'JavaScript',
     'Portfolio',
   ],
-  authors: [{ name: 'Matias Sanchez', url: siteUrl }],
+  authors: [{ name: 'Matias Sanchez', url: 'https://masanche.dev' }],
   creator: 'Matias Sanchez',
   metadataBase: new URL(siteUrl),
   openGraph: {
     type: 'website',
     locale: 'en_US',
     alternateLocale: 'es_AR',
-    url: siteUrl,
+    url: 'https://masanche.dev',
     siteName: 'Matias Sanchez Portfolio',
     title: 'Matias Sanchez | Frontend Developer & Web Designer',
     description:
@@ -60,7 +69,7 @@ export const metadata: Metadata = {
     title: 'Matias Sanchez | Frontend Developer & Web Designer',
     description:
       'Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive web applications.',
-    images: ['/images/og.webp'],
+    images: ['/images/og.png'],
     creator: '@tuTwitter',
   },
   robots: {
