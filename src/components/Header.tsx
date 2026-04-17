@@ -18,7 +18,6 @@ import { useTranslations } from '@/hooks/useTranslations';
 export default function Header() {
   const t = useTranslations();
   const [hidden, setHidden] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const pathname = usePathname();
@@ -43,7 +42,6 @@ export default function Header() {
     } else {
       setHidden(false);
     }
-    setScrolled(latest > 50);
   });
 
   const handleNavClick = (
@@ -68,19 +66,15 @@ export default function Header() {
         }}
         animate={hidden && !isMobileMenuVisible ? 'hidden' : 'visible'}
         transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-background/80 backdrop-blur-xl border-b border-border'
-            : 'bg-transparent'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-8"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 rounded-full bg-white/70 dark:bg-black/50 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-black/5 dark:shadow-black/20 shadow-2xl">
           <div className="flex items-center justify-between h-16">
             <Link
               href="/"
-              className="text-lg font-semibold tracking-tight hover:text-emerald-500 transition-colors"
+              className="text-lg font-semibold tracking-tight hover:text-emerald-900 transition-colors"
             >
-              Portfolio<span className="text-emerald-500">.</span>
+              <span className="font-light">Matias</span>Portfolio_
             </Link>
 
             <nav className="hidden md:flex items-center gap-8">

@@ -14,9 +14,7 @@ export const en = {
     shortEs: 'ES',
   },
   hero: {
-    availability: 'Available for work',
-    titleLine1: 'Frontend',
-    titleLine2: 'Developer',
+    titleHighlight: 'Frontend Developer & Web Designer.',
     description:
       'Crafting modern web experiences with React, Next.js, and TypeScript. Focused on performance, accessibility, and beautiful interfaces.',
     viewWork: 'View my work',

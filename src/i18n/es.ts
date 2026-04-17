@@ -16,11 +16,9 @@ export const es = {
     shortEs: 'ES',
   },
   hero: {
-    availability: 'Disponible para trabajar',
-    titleLine1: 'Desarrollador',
-    titleLine2: 'Frontend',
+    titleHighlight: 'Desarrollador Frontend & Diseñador Web.',
     description:
-      'Construyendo experiencias web modernas con React, Next.js y TypeScript. Enfocado en rendimiento, accesibilidad e interfaces cuidadas.',
+      'Creando experiencias web modernas con React, Next.js y TypeScript. Enfocado en rendimiento, accesibilidad e interfaces cuidadas.',
     viewWork: 'Ver proyectos',
     getInTouch: 'Contactame',
     scrollDown: 'Desplazarse hacia abajo',

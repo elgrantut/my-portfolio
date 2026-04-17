@@ -16,10 +16,73 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
 });
 
+const getBaseUrl = () => {
+  // Vercel preview deployments
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  // Production
+  return 'https://masanche.dev';
+};
+
+const siteUrl = getBaseUrl();
+
 export const metadata: Metadata = {
-  title: 'Portfolio | Frontend Developer',
+  title: 'Matias Sanchez | Frontend Developer & Web Designer',
   description:
-    'Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive web applications.',
+    'Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive web applications with focus on performance, accessibility, and beautiful interfaces.',
+  keywords: [
+    'Frontend Developer',
+    'Web Designer',
+    'React',
+    'Next.js',
+    'TypeScript',
+    'Web Development',
+    'UI/UX',
+    'JavaScript',
+    'Portfolio',
+  ],
+  authors: [{ name: 'Matias Sanchez', url: 'https://masanche.dev' }],
+  creator: 'Matias Sanchez',
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    alternateLocale: 'es_AR',
+    url: 'https://masanche.dev',
+    siteName: 'Matias Sanchez Portfolio',
+    title: 'Matias Sanchez | Frontend Developer & Web Designer',
+    description:
+      'Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive web applications with focus on performance, accessibility, and beautiful interfaces.',
+    images: [
+      {
+        url: '/images/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Matias Sanchez - Frontend Developer & Web Designer',
+        type: 'image/png',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Matias Sanchez | Frontend Developer & Web Designer',
+    description:
+      'Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive web applications.',
+    images: ['/images/og.png'],
+    creator: '@tuTwitter',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
