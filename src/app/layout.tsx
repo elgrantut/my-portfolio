@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     title: 'Matias Sanchez | Frontend Developer & Web Designer',
     description:
       'Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive web applications.',
-    images: ['/images/og.png'],
+    images: ['/images/og.webp'],
     creator: '@tuTwitter',
   },
   robots: {
