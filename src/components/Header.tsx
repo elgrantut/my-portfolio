@@ -72,10 +72,9 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             <Link
               href="/"
-              className="text-lg font-semibold tracking-tight hover:text-emerald-500 transition-colors"
+              className="text-lg font-semibold tracking-tight hover:text-emerald-900 transition-colors"
             >
-              <span className="font-light">Matias</span>Portfolio
-              <span className="text-white">._</span>
+              <span className="font-light">Matias</span>Portfolio_
             </Link>
 
             <nav className="hidden md:flex items-center gap-8">
