@@ -11,7 +11,7 @@ export default function LanguageToggle() {
   return (
     <button
       onClick={toggleLanguage}
-      className="inline-flex items-center gap-1.5 p-2 rounded-full bg-secondary hover:bg-secondary/80 transition-colors"
+      className="inline-flex items-center gap-1.5 py-2 px-3 rounded-full bg-secondary hover:bg-secondary/80 transition-colors"
       aria-label={t.language.toggleLabel}
       title={t.language.toggleLabel}
     >
