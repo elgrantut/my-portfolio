@@ -16,13 +16,21 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
 });
 
+const PRODUCTION_SITE_URL = 'https://masanche.dev';
+
 const getBaseUrl = () => {
-  // Vercel preview deployments
+  // Always use the canonical domain in Vercel production deployments.
+  if (process.env.VERCEL_ENV === 'production') {
+    return PRODUCTION_SITE_URL;
+  }
+
+  // Use the deployment URL for Vercel preview environments.
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  // Production
-  return 'https://masanche.dev';
+
+  // Fallback for local development.
+  return 'http://localhost:3000';
 };
 
 const siteUrl = getBaseUrl();
@@ -42,14 +50,14 @@ export const metadata: Metadata = {
     'JavaScript',
     'Portfolio',
   ],
-  authors: [{ name: 'Matias Sanchez', url: 'https://masanche.dev' }],
+  authors: [{ name: 'Matias Sanchez', url: PRODUCTION_SITE_URL }],
   creator: 'Matias Sanchez',
   metadataBase: new URL(siteUrl),
   openGraph: {
     type: 'website',
     locale: 'en_US',
     alternateLocale: 'es_AR',
-    url: 'https://masanche.dev',
+    url: siteUrl,
     siteName: 'Matias Sanchez Portfolio',
     title: 'Matias Sanchez | Frontend Developer & Web Designer',
     description:
