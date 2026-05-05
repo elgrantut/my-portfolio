@@ -1,8 +1,16 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
+import {
+  Shader,
+  Dither,
+  Plasma,
+  VideoTexture,
+  CursorTrail,
+} from 'shaders/react';
+
 import { useScrollTo } from '@/hooks';
 import { useTranslations } from '@/hooks/useTranslations';
 
@@ -10,7 +18,6 @@ export default function Hero() {
   const t = useTranslations();
   const ref = useRef<HTMLDivElement>(null);
   const scrollTo = useScrollTo();
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
@@ -19,41 +26,29 @@ export default function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
   return (
     <section
       ref={ref}
-      onMouseMove={handleMouseMove}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-170 md:min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Video background - scaled and shifted right so center element doesn't overlap text */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
+      <Shader
         className="absolute inset-0 w-full h-full object-cover scale-[1.3] translate-x-[15%] origin-center"
+        disableTelemetry={true}
       >
-        <source src="/videos/coder-hero.webm" type="video/webm" />
-      </video>
+        <Dither colorA="#022c22" colorB="#10b981" pixelSize={5} threshold={0.5}>
+          <Plasma
+            colorA="#ffffff"
+            contrast={0.9}
+            density={0.3}
+            intensity={1.3}
+            speed={1}
+          />
+          <VideoTexture url="/videos/coder-hero.webm" />
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60 dark:bg-black/50" />
-
-      {/* Spotlight effect following cursor */}
-      <div
-        className="pointer-events-none absolute inset-0 z-[5] transition-opacity duration-300"
-        style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(16, 185, 129, 0.15), transparent 40%)`,
-        }}
-      />
+          <CursorTrail />
+        </Dither>
+      </Shader>
 
       {/* Content */}
       <motion.div
@@ -72,7 +67,7 @@ export default function Hero() {
             }}
             className="text-center md:text-left col-span-2"
           >
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-[2.8rem] font-extrabold text-white leading-tight">
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-[2.8rem] font-extrabold text-white leading-tight text-shadow-lg/60">
               <span className="text-emerald-500">{t.hero.titleHighlight}</span>{' '}
               {t.hero.description}
             </p>
@@ -95,7 +90,7 @@ export default function Hero() {
                 e.preventDefault();
                 scrollTo('#work');
               }}
-              className="group relative px-8 py-3.5 bg-white text-black font-medium rounded-full overflow-hidden transition-all hover:scale-105"
+              className="group relative px-8 py-3.5 bg-white text-black font-medium rounded-full overflow-hidden transition-all hover:scale-105 shadow-2xl/80"
             >
               <span className="relative z-10">{t.hero.viewWork}</span>
             </a>
@@ -106,7 +101,7 @@ export default function Hero() {
                 e.preventDefault();
                 scrollTo('#contact');
               }}
-              className="px-8 py-3.5 border border-emerald-400 font-medium rounded-full bg-emerald-500 text-white hover:bg-emerald-400 transition-all hover:scale-105"
+              className="px-8 py-3.5 border border-emerald-400 font-medium rounded-full bg-emerald-500 text-white hover:bg-emerald-400 transition-all hover:scale-105 shadow-2xl/80"
             >
               {t.hero.getInTouch}
             </a>
@@ -133,7 +128,7 @@ export default function Hero() {
       </motion.button>
 
       {/* Bottom gradient fade to content */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black to-transparent" />
     </section>
   );
 }
