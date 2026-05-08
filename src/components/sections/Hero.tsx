@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
+import { Trans } from 'react-i18next';
 import {
   Shader,
   Dither,
@@ -36,7 +37,12 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full object-cover scale-[1.3] translate-x-[15%] origin-center"
         disableTelemetry={true}
       >
-        <Dither colorA="#022c22" colorB="#10b981" pixelSize={5} threshold={0.5}>
+        <Dither
+          colorA="#022c22"
+          colorB="#10b981"
+          pixelSize={3.5}
+          threshold={0.5}
+        >
           <Plasma
             colorA="#ffffff"
             contrast={0.9}
@@ -67,9 +73,25 @@ export default function Hero() {
             }}
             className="text-center md:text-left col-span-2"
           >
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-[2.8rem] font-extrabold text-white leading-tight text-shadow-lg/60">
-              <span className="text-emerald-500">{t.hero.titleHighlight}</span>{' '}
-              {t.hero.description}
+            <p className="text-white uppercase font-black text-3xl md:text-6xl md:max-w-lg text-shadow-lg/50">
+              <span>{'<'} </span>
+              <Trans
+                i18nKey="hero.titleHighlight"
+                components={{
+                  span: <span className="font-normal" />,
+                }}
+              />
+            </p>
+
+            <br />
+
+            <p className="md:max-w-3/4 text-xl sm:text-2xl md:text-3xl lg:text-3xl font-medium text-white leading-tight tracking-tight text-shadow-lg/50">
+              <Trans
+                i18nKey="hero.description"
+                components={{
+                  span: <span className="font-black" />,
+                }}
+              />
             </p>
           </motion.div>
 
