@@ -106,27 +106,19 @@ export default function Hero() {
             }}
             className="flex flex-col sm:flex-row h-full items-center lg:items-end justify-center md:justify-start gap-4 col-span-2 xl:col-span-1"
           >
-            <a
-              href="#work"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollTo('#work');
-              }}
+            <button
+              onClick={() => scrollTo('#work')}
               className="group relative px-8 py-3.5 bg-white text-black font-medium rounded-full overflow-hidden transition-all hover:scale-105 shadow-2xl/80"
             >
               <span className="relative z-10">{t.hero.viewWork}</span>
-            </a>
+            </button>
 
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollTo('#contact');
-              }}
+            <button
+              onClick={() => scrollTo('#contact')}
               className="px-8 py-3.5 border border-emerald-400 font-medium rounded-full bg-emerald-500 text-white hover:bg-emerald-400 transition-all hover:scale-105 shadow-2xl/80"
             >
               {t.hero.getInTouch}
-            </a>
+            </button>
           </motion.div>
         </div>
       </motion.div>
@@ -145,7 +137,7 @@ export default function Hero() {
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="p-2 border border-white/50 rounded-full"
         >
-          <ArrowDown className="w-4 h-4" />
+          <ArrowDown className="size-4" />
         </motion.div>
       </motion.button>
 
