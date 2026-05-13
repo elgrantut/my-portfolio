@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
+import { Trans } from 'react-i18next';
 import {
   Shader,
   Dither,
@@ -36,7 +37,12 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full object-cover scale-[1.3] translate-x-[15%] origin-center"
         disableTelemetry={true}
       >
-        <Dither colorA="#022c22" colorB="#10b981" pixelSize={5} threshold={0.5}>
+        <Dither
+          colorA="#022c22"
+          colorB="#10b981"
+          pixelSize={3.5}
+          threshold={0.5}
+        >
           <Plasma
             colorA="#ffffff"
             contrast={0.9}
@@ -67,9 +73,25 @@ export default function Hero() {
             }}
             className="text-center md:text-left col-span-2"
           >
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-[2.8rem] font-extrabold text-white leading-tight text-shadow-lg/60">
-              <span className="text-emerald-500">{t.hero.titleHighlight}</span>{' '}
-              {t.hero.description}
+            <p className="text-white uppercase font-black text-3xl md:text-6xl md:max-w-lg text-shadow-lg/50">
+              <span>{'<'} </span>
+              <Trans
+                i18nKey="hero.titleHighlight"
+                components={{
+                  span: <span className="font-normal" />,
+                }}
+              />
+            </p>
+
+            <br />
+
+            <p className="md:max-w-3/4 text-xl sm:text-2xl md:text-3xl lg:text-3xl font-medium text-white leading-tight tracking-tight text-shadow-lg/50">
+              <Trans
+                i18nKey="hero.description"
+                components={{
+                  span: <span className="font-black" />,
+                }}
+              />
             </p>
           </motion.div>
 
@@ -84,27 +106,19 @@ export default function Hero() {
             }}
             className="flex flex-col sm:flex-row h-full items-center lg:items-end justify-center md:justify-start gap-4 col-span-2 xl:col-span-1"
           >
-            <a
-              href="#work"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollTo('#work');
-              }}
+            <button
+              onClick={() => scrollTo('#work')}
               className="group relative px-8 py-3.5 bg-white text-black font-medium rounded-full overflow-hidden transition-all hover:scale-105 shadow-2xl/80"
             >
               <span className="relative z-10">{t.hero.viewWork}</span>
-            </a>
+            </button>
 
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollTo('#contact');
-              }}
+            <button
+              onClick={() => scrollTo('#contact')}
               className="px-8 py-3.5 border border-emerald-400 font-medium rounded-full bg-emerald-500 text-white hover:bg-emerald-400 transition-all hover:scale-105 shadow-2xl/80"
             >
               {t.hero.getInTouch}
-            </a>
+            </button>
           </motion.div>
         </div>
       </motion.div>
@@ -123,7 +137,7 @@ export default function Hero() {
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="p-2 border border-white/50 rounded-full"
         >
-          <ArrowDown className="w-4 h-4" />
+          <ArrowDown className="size-4" />
         </motion.div>
       </motion.button>
 
