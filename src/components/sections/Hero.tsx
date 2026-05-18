@@ -52,7 +52,7 @@ export default function Hero() {
           />
           <VideoTexture url="/videos/coder-hero.webm" />
 
-          <CursorTrail />
+          <CursorTrail radius={0.25} />
         </Dither>
       </Shader>
 
