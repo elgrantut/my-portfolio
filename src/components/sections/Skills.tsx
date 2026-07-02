@@ -20,7 +20,7 @@ export default function Skills() {
     <section
       ref={sectionRef}
       id="skills"
-      className="relative py-16 sm:py-32 bg-background overflow-hidden"
+      className="relative py-16 sm:py-24 bg-background overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 grid-pattern opacity-30" />

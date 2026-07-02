@@ -21,7 +21,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative py-32 sm:py-40 bg-secondary/30 overflow-hidden"
+      className="relative py-24 bg-secondary/30 overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 grid-pattern opacity-20" />
