@@ -1,5 +1,6 @@
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
+import LogoMarquee from '@/components/LogoMarquee';
 import Work from '@/components/sections/Work';
 import Skills from '@/components/sections/Skills';
 import Contact from '@/components/sections/Contact';
@@ -12,6 +13,7 @@ export default function Home() {
       <About />
       <Work />
       <Skills />
+      <LogoMarquee />
       <Contact />
       <SiteFooter />
     </main>
