@@ -61,7 +61,7 @@ export default function LogoMarquee() {
   return (
     <section className="relative overflow-hidden py-10 bg-emerald-800 dark:bg-emerald-50  group">
       <h2 className="dark:text-black/80 text-white text-center text-lg font-semibold mb-8">
-        Everyday's Toolbox.{' '}
+        Everyday&apos;s Toolbox.{' '}
         <span className="font-normal">Mastered for every project.</span>
       </h2>
       {/* Left edge fade */}
